@@ -9,5 +9,7 @@ namespace eGym.Models
         public string resumen { get; set; }
         public string imagenTienda { get; set; }
 
+        //relaciones
+        public List<Ropa> Ropas { get; set; }
     }
 }
