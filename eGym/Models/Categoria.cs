@@ -6,9 +6,10 @@ namespace eGym.Models
     {
         [Key]
         public int idCategoria { get; set; }
+        [Display(Name ="Categoría")]
         public string nombre { get; set; }
 
         //relaciones
-        public List<Ropa> Ropas { get; set; }
+        //public List<Ropa> Ropas { get; set; }
     }
 }
