@@ -1,9 +1,11 @@
-﻿using System.Net.NetworkInformation;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Net.NetworkInformation;
 
 namespace eGym.Models
 {
     public class Tienda
     {
+        [Key]
         public int idTienda { get; set; }
         public string nombre { get; set; }
         public string resumen { get; set; }

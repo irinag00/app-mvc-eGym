@@ -1,7 +1,10 @@
-﻿namespace eGym.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace eGym.Models
 {
     public class Marca
     {
+        [Key]
         public int idMarca { get; set; }
         public string nombre { get; set; }
         public string resumen { get; set; }

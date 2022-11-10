@@ -1,4 +1,6 @@
-﻿namespace eGym.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace eGym.Models
 {
     public class Ropa_Color
     {
