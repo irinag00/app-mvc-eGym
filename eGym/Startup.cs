@@ -26,10 +26,11 @@ namespace eGym
         public void ConfigureServices(IServiceCollection services)
         {
             //Db context configuration
-            //services.AddDbContext<AppDbContext>(options =>
-            //options.UseSqlServer(
-              // Configuration.GetConnectionString("cadenaSQLServer")
-              //));
+            services.AddDbContext<AppDbContext>(options =>
+            options.UseSqlServer(
+            Configuration.GetConnectionString("cadenaSQLServer")
+             ));
+            //---------------------------------------------
 
             services.AddControllersWithViews();
         }
