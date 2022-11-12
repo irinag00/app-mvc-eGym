@@ -1,10 +1,10 @@
 ﻿@model eGym.Models.Color
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles";
 }
 
-<h1>Details</h1>
+<h1>Detalles</h1>
 
 <div>
     <h4>Color</h4>
@@ -22,9 +22,13 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.imagenColor)
         </dd>
+        <dt class="col-sm-2">
+            <input type="hidden" name="foto" id="foto" value="@Model.imagenColor" />
+            <img src="@(!string.IsNullOrEmpty(Model.imagenColor) ? "/pictures/img-colores/"+Model.imagenColor : "")" id="imagen" class="rounded-circle" style="max-width:50px" />
+        </dt>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.idColor">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.idColor">Editar</a> |
     <a asp-action="Index">Back to List</a>
 </div>

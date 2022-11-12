@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using eGym.Models;
+using System.Drawing;
 
 namespace eGym.Controllers
 {
@@ -59,6 +60,23 @@ namespace eGym.Controllers
         {
             if (ModelState.IsValid)
             {
+                var archivos = HttpContext.Request.Form.Files;
+                if (archivos != null && archivos.Count > 0)
+                {
+                    var archivoFoto = archivos[0];
+                    //var pathDestino = Path.Combine(env.WebRootPath, "fotos\\portadas-libros");
+                    if (archivoFoto.Length > 0)
+                    {
+                        var pathDestino = Path.Combine(env.WebRootPath, "pictures\\img-marca");
+                        var archivoDestino = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(archivoFoto.FileName);
+
+                        using (var filestream = new FileStream(Path.Combine(pathDestino, archivoDestino), FileMode.Create))
+                        {
+                            archivoFoto.CopyTo(filestream);
+                            marca.imagenMarca = archivoDestino;
+                        };
+                    }
+                }
                 _context.Add(marca);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -98,6 +116,29 @@ namespace eGym.Controllers
             {
                 try
                 {
+                    var archivos = HttpContext.Request.Form.Files;
+                    if (archivos != null && archivos.Count > 0)
+                    {
+                        var archivoFoto = archivos[0];
+                        var pathDestino = Path.Combine(env.WebRootPath, "pictures\\img-marca");
+                        if (archivoFoto.Length > 0)
+                        {
+                            var archivoDestino = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(archivoFoto.FileName);
+
+                            if (!string.IsNullOrEmpty(marca.imagenMarca))
+                            {
+                                string fotoAnterior = Path.Combine(pathDestino, marca.imagenMarca);
+                                if (System.IO.File.Exists(fotoAnterior))
+                                    System.IO.File.Delete(fotoAnterior);
+                            }
+
+                            using (var filestream = new FileStream(Path.Combine(pathDestino, archivoDestino), FileMode.Create))
+                            {
+                                archivoFoto.CopyTo(filestream);
+                                marca.imagenMarca = archivoDestino;
+                            };
+                        }
+                    }
                     _context.Update(marca);
                     await _context.SaveChangesAsync();
                 }

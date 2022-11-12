@@ -1,38 +1,46 @@
 ﻿@model eGym.Models.Color
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear";
 }
 
-<h1>Create</h1>
+<h1>Crear</h1>
 
-<h4>Color</h4>
+<h4>Lista de Colores</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="nombre" class="control-label"></label>
                 <input asp-for="nombre" class="form-control" />
                 <span asp-validation-for="nombre" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
+                <img src="" id="imagen" style="max-width:50px" />
                 <label asp-for="imagenColor" class="control-label"></label>
-                <input asp-for="imagenColor" class="form-control" />
+                <input name="seleccionImg" id="seleccionImg" type="file" accept="image/jpeg" />
+                <label class="control-label">Seleccione una imagen</label>
+
                 <span asp-validation-for="imagenColor" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Crear" class="btn btn-outline-success"/> 
             </div>
+            <br />
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Volver a la Lista</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="~/js/preview.js"></script>

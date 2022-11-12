@@ -58,6 +58,23 @@ namespace eGym.Controllers
         {
             if (ModelState.IsValid)
             {
+                var archivos = HttpContext.Request.Form.Files;
+                if (archivos != null && archivos.Count > 0)
+                {
+                    var archivoFoto = archivos[0];
+                    //var pathDestino = Path.Combine(env.WebRootPath, "fotos\\portadas-libros");
+                    if (archivoFoto.Length > 0)
+                    {
+                        var pathDestino = Path.Combine(env.WebRootPath, "pictures\\img-tienda");
+                        var archivoDestino = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(archivoFoto.FileName);
+
+                        using (var filestream = new FileStream(Path.Combine(pathDestino, archivoDestino), FileMode.Create))
+                        {
+                            archivoFoto.CopyTo(filestream);
+                            tienda.imagenTienda = archivoDestino;
+                        };
+                    }
+                }
                 _context.Add(tienda);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -97,6 +114,29 @@ namespace eGym.Controllers
             {
                 try
                 {
+                    var archivos = HttpContext.Request.Form.Files;
+                    if (archivos != null && archivos.Count > 0)
+                    {
+                        var archivoFoto = archivos[0];
+                        var pathDestino = Path.Combine(env.WebRootPath, "pictures\\img-tienda");
+                        if (archivoFoto.Length > 0)
+                        {
+                            var archivoDestino = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(archivoFoto.FileName);
+
+                            if (!string.IsNullOrEmpty(tienda.imagenTienda))
+                            {
+                                string fotoAnterior = Path.Combine(pathDestino, tienda.imagenTienda);
+                                if (System.IO.File.Exists(fotoAnterior))
+                                    System.IO.File.Delete(fotoAnterior);
+                            }
+
+                            using (var filestream = new FileStream(Path.Combine(pathDestino, archivoDestino), FileMode.Create))
+                            {
+                                archivoFoto.CopyTo(filestream);
+                                tienda.imagenTienda = archivoDestino;
+                            };
+                        }
+                    }
                     _context.Update(tienda);
                     await _context.SaveChangesAsync();
                 }

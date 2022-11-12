@@ -16,4 +16,11 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\pictures\img-colores\" />
+    <Folder Include="wwwroot\pictures\img-ropa\" />
+    <Folder Include="wwwroot\pictures\img-marca\" />
+    <Folder Include="wwwroot\pictures\img-tienda\" />
+  </ItemGroup>
+
 </Project>

@@ -6,7 +6,8 @@ namespace eGym.Models
     {
         public int idRopa { get; set; }
         public Ropa ropa { get; set; }
-        public int idColor { get; set; }
-        public Color color { get; set; }
+       
+       public int idColor { get; set; }
+       public Color color { get; set; }
     }
 }
