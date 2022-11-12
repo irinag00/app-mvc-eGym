@@ -1,10 +1,10 @@
 ﻿@model eGym.Models.Marca
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles";
 }
 
-<h1>Details</h1>
+<h1>Detalles</h1>
 
 <div>
     <h4>Marca</h4>
@@ -25,12 +25,13 @@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.imagenMarca)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.imagenMarca)
-        </dd>
+        <dt class="col-sm-10">
+            <input type="hidden" name="foto" id="foto" value="@Model.imagenMarca" />
+            <img src="@(!string.IsNullOrEmpty(Model.imagenMarca) ? "/pictures/img-marca/"+Model.imagenMarca : "")" id="imagen" class="rounded-circle" style="max-width:150px" />
+        </dt>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.idMarca">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@Model?.idMarca">Edit</a> |
+    <a class="btn btn-outline-primary" asp-action="Index"><i class="bi bi-arrow-return-left"></i> Volver a la Lista</a>
 </div>
