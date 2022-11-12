@@ -1,16 +1,16 @@
 ﻿@model eGym.Models.Tienda
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar";
 }
 
-<h1>Edit</h1>
+<h1>Editar</h1>
 
-<h4>Tienda</h4>
+<h4>Lista de Tiendas</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="idTienda" />
             <div class="form-group">
@@ -24,21 +24,28 @@
                 <span asp-validation-for="resumen" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="imagenTienda" class="control-label"></label>
-                <input asp-for="imagenTienda" class="form-control" />
+                <input type="hidden" name="imagenTienda" id="imagenTienda" value="@Model.imagenTienda" />
+                <img src="@(!string.IsNullOrEmpty(Model.imagenTienda) ? "/pictures/img-tienda/"+Model.imagenTienda : "")" id="imagen" class="rounded-circle" style="max-width:150px" />
+                <input type="file" name="seleccionImg" id="seleccionImg" accept="image/jpeg" />
+                <label class="control-label">Seleccione una imagen</label>
+
                 <span asp-validation-for="imagenTienda" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-outline-success"  />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-outline-primary" asp-action="Index"><i class="bi bi-arrow-return-left"></i> Volver a la Lista</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="~/js/preview.js"></script>
+

@@ -30,13 +30,13 @@
                     <td class="align-middle">
                             @if (!string.IsNullOrEmpty(item.imagenMarca))
                             {
-                                <img src="~/pictures/img-colores/@item.imagenMarca" class="rounded-circle" style="max-width:150px" asp-append-version="true" />
+                                <img src="~/pictures/img-marca/@item.imagenMarca" class="rounded-circle" style="max-width:150px" asp-append-version="true" />
                             }
                     </td>
-                        <td class="align-middle">
+                    <td class="align-middle">
                         @Html.DisplayFor(modelItem => item.nombre)
                     </td>
-                    <td class="align-middle">
+                        <td class="align-middle" style="max-width:250px">
                         @Html.DisplayFor(modelItem => item.resumen)
                     </td>
                     <td class="text-lg-end align-middle">

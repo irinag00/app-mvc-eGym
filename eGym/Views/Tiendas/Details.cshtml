@@ -1,10 +1,10 @@
 ﻿@model eGym.Models.Tienda
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles";
 }
 
-<h1>Details</h1>
+<h1>Detalles</h1>
 
 <div>
     <h4>Tienda</h4>
@@ -20,17 +20,18 @@
             @Html.DisplayNameFor(model => model.resumen)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.resumen)
+            <a href="@Html.DisplayFor(model => model.resumen)" target="_blank">@Html.DisplayFor(model => model.resumen)</a>
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.imagenTienda)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.imagenTienda)
-        </dd>
+        <dt class="col-sm-10">
+            <input type="hidden" name="foto" id="foto" value="@Model.imagenTienda" />
+            <img src="@(!string.IsNullOrEmpty(Model.imagenTienda) ? "/pictures/img-tienda/"+Model.imagenTienda: "")" id="imagen" class="rounded-circle" style="max-width:150px" />
+        </dt>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.idTienda">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@Model?.idTienda">Editar</a> |
+    <a class="btn btn-outline-primary" asp-action="Index"><i class="bi bi-arrow-return-left"></i> Volver a la Lista</a>
 </div>

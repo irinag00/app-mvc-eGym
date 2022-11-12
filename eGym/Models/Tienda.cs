@@ -7,11 +7,14 @@ namespace eGym.Models
     {
         [Key]
         public int idTienda { get; set; }
+        [Display(Name = "Nombre")]
         public string nombre { get; set; }
+        [Display(Name = "Página Web")]
         public string resumen { get; set; }
-        public string imagenTienda { get; set; }
+        [Display(Name = "Imagen")]
+        public string ? imagenTienda { get; set; }
 
         //relaciones
-        public List<Ropa> Ropas { get; set; }
+        public List<Ropa> ? Ropas { get; set; }
     }
 }

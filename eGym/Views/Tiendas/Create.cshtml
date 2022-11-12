@@ -1,16 +1,16 @@
 ﻿@model eGym.Models.Tienda
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Añadir nueva tienda";
 }
 
-<h1>Create</h1>
+<h1>Crear</h1>
 
-<h4>Tienda</h4>
+<h4>Lista de Tiendas</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="nombre" class="control-label"></label>
@@ -22,22 +22,29 @@
                 <input asp-for="resumen" class="form-control" />
                 <span asp-validation-for="resumen" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
+                <img src="" id="imagen" style="max-width:50px" />
                 <label asp-for="imagenTienda" class="control-label"></label>
-                <input asp-for="imagenTienda" class="form-control" />
+                <input name="seleccionImg" id="seleccionImg" type="file" accept="image/jpeg" />
+                <label class="control-label">Seleccione una imagen</label>
+
                 <span asp-validation-for="imagenTienda" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Crear" class="btn btn-outline-success" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-outline-primary" asp-action="Index"><i class="bi bi-arrow-return-left"></i> Volver a la Lista</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="~/js/preview.js"></script>
