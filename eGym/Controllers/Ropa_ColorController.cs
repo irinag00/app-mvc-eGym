@@ -12,10 +12,12 @@ namespace eGym.Controllers
     public class Ropa_ColorController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IWebHostEnvironment env;
 
-        public Ropa_ColorController(AppDbContext context)
+        public Ropa_ColorController(AppDbContext context, IWebHostEnvironment env)
         {
             _context = context;
+            this.env = env;
         }
 
         // GET: Ropa_Color
@@ -48,8 +50,8 @@ namespace eGym.Controllers
         // GET: Ropa_Color/Create
         public IActionResult Create()
         {
-            ViewData["idColor"] = new SelectList(_context.Colores, "idColor", "idColor");
-            ViewData["idRopa"] = new SelectList(_context.Ropas, "idRopa", "idRopa");
+            ViewData["idColor"] = new SelectList(_context.Colores, "idColor", "nombre", "imagenColor");
+            ViewData["idRopa"] = new SelectList(_context.Ropas, "idRopa", "nombre", "imagenRopa");
             return View();
         }
 
@@ -66,8 +68,8 @@ namespace eGym.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["idColor"] = new SelectList(_context.Colores, "idColor", "idColor", ropa_Color.idColor);
-            ViewData["idRopa"] = new SelectList(_context.Ropas, "idRopa", "idRopa", ropa_Color.idRopa);
+            ViewData["idColor"] = new SelectList(_context.Colores, "idColor", "nombre", "imagenColor", ropa_Color.idColor.ToString());
+            ViewData["idRopa"] = new SelectList(_context.Ropas, "idRopa", "nombre", "imagenRopa", ropa_Color.idRopa.ToString());
             return View(ropa_Color);
         }
 
@@ -84,8 +86,10 @@ namespace eGym.Controllers
             {
                 return NotFound();
             }
-            ViewData["idColor"] = new SelectList(_context.Colores, "idColor", "idColor", ropa_Color.idColor);
-            ViewData["idRopa"] = new SelectList(_context.Ropas, "idRopa", "idRopa", ropa_Color.idRopa);
+            ViewData["idColor"] = new SelectList(_context.Colores, "idColor", "nombre", "imagenColor", ropa_Color.idColor.ToString());
+            ViewData["idRopa"] = new SelectList(_context.Ropas, "idRopa", "nombre", "imagenRopa", ropa_Color.idRopa.ToString());
+            //ViewData["idColor"] = new SelectList(_context.Colores, "idColor", "idColor", ropa_Color.idColor);
+            //ViewData["idRopa"] = new SelectList(_context.Ropas, "idRopa", "idRopa", ropa_Color.idRopa);
             return View(ropa_Color);
         }
 
@@ -121,8 +125,10 @@ namespace eGym.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["idColor"] = new SelectList(_context.Colores, "idColor", "idColor", ropa_Color.idColor);
-            ViewData["idRopa"] = new SelectList(_context.Ropas, "idRopa", "idRopa", ropa_Color.idRopa);
+            ViewData["idColor"] = new SelectList(_context.Colores, "idColor", "nombre", "imagenColor", ropa_Color.idColor.ToString());
+            ViewData["idRopa"] = new SelectList(_context.Ropas, "idRopa", "nombre", "imagenRopa", ropa_Color.idRopa.ToString());
+            //ViewData["idColor"] = new SelectList(_context.Colores, "idColor", "idColor", ropa_Color.idColor);
+            //ViewData["idRopa"] = new SelectList(_context.Ropas, "idRopa", "idRopa", ropa_Color.idRopa);
             return View(ropa_Color);
         }
 

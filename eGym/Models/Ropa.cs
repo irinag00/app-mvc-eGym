@@ -18,7 +18,7 @@ namespace eGym.Models
         public string ? imagenRopa { get; set; }
          
         //relaciones
-        public List<Ropa_Color> ? ropas_colores { get; set; }
+        public List<Ropa_Color> ropas_colores { get; set; }
 
         //relacion-marca
         [Display(Name = "Marca")]

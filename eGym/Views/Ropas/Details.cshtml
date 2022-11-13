@@ -36,9 +36,9 @@
                                 @foreach (var color in Model.ropas_colores) 
                                 {
                                     <div class="column text-center">
-                                        <img class="border-info rounded-circle" src="@color.color.imagenColor" style="max-width: 150px" />
+                                        @*<img src="~/pictures/img-colores/@color.color.imagenColor" id="imagen" class="rounded-circle" style="max-width:150px" asp-append-version="true" />*@
                                         <br />
-                                        <a asp-controller="Colores" asp-action="Details" asp-route-id="@color.idColor">@color.color.nombre</a>
+                                        <a asp-controller="Colores" asp-action="Details" asp-route-id="@color.idColor">@color.idColor</a>
                                     </div>
                                 }
                             </div>
