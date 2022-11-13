@@ -38,6 +38,7 @@ namespace eGym.Controllers
             var ropa_Color = await _context.Ropa_Colores
                 .Include(r => r.color)
                 .Include(r => r.ropa)
+                .Include(r => r.color.imagenColor)
                 .FirstOrDefaultAsync(m => m.idRopa == id);
             if (ropa_Color == null)
             {
@@ -50,8 +51,8 @@ namespace eGym.Controllers
         // GET: Ropa_Color/Create
         public IActionResult Create()
         {
-            ViewData["idColor"] = new SelectList(_context.Colores, "idColor", "nombre", "imagenColor");
-            ViewData["idRopa"] = new SelectList(_context.Ropas, "idRopa", "nombre", "imagenRopa");
+            ViewData["idColor"] = new SelectList(_context.Colores, "idColor", "nombre");
+            ViewData["idRopa"] = new SelectList(_context.Ropas, "idRopa", "nombre");
             return View();
         }
 
@@ -68,8 +69,8 @@ namespace eGym.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["idColor"] = new SelectList(_context.Colores, "idColor", "nombre", "imagenColor", ropa_Color.idColor.ToString());
-            ViewData["idRopa"] = new SelectList(_context.Ropas, "idRopa", "nombre", "imagenRopa", ropa_Color.idRopa.ToString());
+            ViewData["idColor"] = new SelectList(_context.Colores, "idColor", "nombre", ropa_Color.idColor);
+            ViewData["idRopa"] = new SelectList(_context.Ropas, "idRopa", "nombre", ropa_Color.idRopa);
             return View(ropa_Color);
         }
 
@@ -86,8 +87,8 @@ namespace eGym.Controllers
             {
                 return NotFound();
             }
-            ViewData["idColor"] = new SelectList(_context.Colores, "idColor", "nombre", "imagenColor", ropa_Color.idColor.ToString());
-            ViewData["idRopa"] = new SelectList(_context.Ropas, "idRopa", "nombre", "imagenRopa", ropa_Color.idRopa.ToString());
+            ViewData["idColor"] = new SelectList(_context.Colores, "idColor", "nombre", ropa_Color.idColor);
+            ViewData["idRopa"] = new SelectList(_context.Ropas, "idRopa", "nombre", ropa_Color.idRopa);
             //ViewData["idColor"] = new SelectList(_context.Colores, "idColor", "idColor", ropa_Color.idColor);
             //ViewData["idRopa"] = new SelectList(_context.Ropas, "idRopa", "idRopa", ropa_Color.idRopa);
             return View(ropa_Color);

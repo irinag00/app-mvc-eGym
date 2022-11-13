@@ -35,6 +35,7 @@ namespace eGym.Controllers
             }
 
             var color = await _context.Colores
+                .Include(r => r.ropas_colores)
                 .FirstOrDefaultAsync(m => m.idColor == id);
             if (color == null)
             {
@@ -166,6 +167,7 @@ namespace eGym.Controllers
             }
 
             var color = await _context.Colores
+                .Include(r => r.ropas_colores)
                 .FirstOrDefaultAsync(m => m.idColor == id);
             if (color == null)
             {

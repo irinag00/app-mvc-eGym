@@ -20,7 +20,7 @@
                 <div class="col-md-6">
                     @if (!string.IsNullOrEmpty(Model.imagenRopa))
                     {
-                        <img src="~/pictures/img-ropa/@Model.imagenRopa" width="100%" asp-append-version="true" />
+                        <img src="~/pictures/img-ropa/@Model.imagenRopa" width="150%" asp-append-version="true" />
                     }
                 </div>
                 <div>
@@ -33,14 +33,19 @@
                             <b>Colores: </b>
                             <hr />
                             <div class="row">
-                                @foreach (var color in Model.ropas_colores) 
+                                @*<p>@Html.DisplayFor(modelItem => Model.ropas_colores)</p>*@
+                                @*@foreach (var color in Model.ropas_colores) 
                                 {
                                     <div class="column text-center">
-                                        @*<img src="~/pictures/img-colores/@color.color.imagenColor" id="imagen" class="rounded-circle" style="max-width:150px" asp-append-version="true" />*@
-                                        <br />
+                                        @if (!string.IsNullOrEmpty(Model.ropas_colores))
+                                        {
+                                            <img src="~/pictures/img-ropa/@color.color.imagenColor" class="rounded-circle" style="max-width:150px" asp-append-version="true" />
+                                        }
+                                        @*<img class="border-info rounded-circle" src="@color.color.imagenColor" style="max-width: 150px" />*@
+                                    @*    <br />
                                         <a asp-controller="Colores" asp-action="Details" asp-route-id="@color.idColor">@color.idColor</a>
                                     </div>
-                                }
+                                }*@
                             </div>
                         </p>
                     </div>
