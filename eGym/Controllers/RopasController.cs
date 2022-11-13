@@ -39,6 +39,7 @@ namespace eGym.Controllers
                 .Include(r => r.Categoria)
                 .Include(r => r.Marca)
                 .Include(r => r.Tienda)
+                .Include(r => r.ropas_colores)
                 .FirstOrDefaultAsync(m => m.idRopa == id);
             if (ropa == null)
             {

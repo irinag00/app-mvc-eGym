@@ -33,7 +33,7 @@
                             <b>Colores: </b>
                             <hr />
                             <div class="row">
-                                @foreach (var color in Model.ropas_colores)
+                                @foreach (var color in Model.ropas_colores) 
                                 {
                                     <div class="column text-center">
                                         <img class="border-info rounded-circle" src="@color.color.imagenColor" style="max-width: 150px" />
@@ -48,7 +48,6 @@
                 <div class="col-md-12">
                     <div class="card-footer">
                         <p class="card-text">
-                            <a asp-action="Details" asp-route-id="@Model.idRopa" class="btn btn-outline-primary float-right"><i class="bi bi-eye-fill"></i> Ver Detalles</a>
                             <a class="btn btn-success text-white"><i class="bi bi-cart-plus"></i> Añadir al carrito ($@Html.DisplayFor(modelItem => Model.precio))</a>
                         </p>
                     </div>
