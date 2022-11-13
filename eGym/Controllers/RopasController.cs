@@ -51,9 +51,9 @@ namespace eGym.Controllers
         // GET: Ropas/Create
         public IActionResult Create()
         {
-            ViewData["categoriaId"] = new SelectList(_context.Categorias, "idCategoria", "idCategoria");
-            ViewData["marcaId"] = new SelectList(_context.Marcas, "idMarca", "idMarca");
-            ViewData["tiendaId"] = new SelectList(_context.Tiendas, "idTienda", "idTienda");
+            ViewData["categoriaId"] = new SelectList(_context.Categorias, "idCategoria", "nombre");
+            ViewData["marcaId"] = new SelectList(_context.Marcas, "idMarca", "nombre");
+            ViewData["tiendaId"] = new SelectList(_context.Tiendas, "idTienda", "nombre");
             return View();
         }
 
@@ -87,9 +87,9 @@ namespace eGym.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["categoriaId"] = new SelectList(_context.Categorias, "idCategoria", "idCategoria", ropa.categoriaId);
-            ViewData["marcaId"] = new SelectList(_context.Marcas, "idMarca", "idMarca", ropa.marcaId);
-            ViewData["tiendaId"] = new SelectList(_context.Tiendas, "idTienda", "idTienda", ropa.tiendaId);
+            ViewData["categoriaId"] = new SelectList(_context.Categorias, "idCategoria", "nombre", ropa.categoriaId);
+            ViewData["marcaId"] = new SelectList(_context.Marcas, "idMarca", "nombre", ropa.marcaId);
+            ViewData["tiendaId"] = new SelectList(_context.Tiendas, "idTienda", "nombre", ropa.tiendaId);
             return View(ropa);
         }
 
@@ -106,9 +106,9 @@ namespace eGym.Controllers
             {
                 return NotFound();
             }
-            ViewData["categoriaId"] = new SelectList(_context.Categorias, "idCategoria", "idCategoria", ropa.categoriaId);
-            ViewData["marcaId"] = new SelectList(_context.Marcas, "idMarca", "idMarca", ropa.marcaId);
-            ViewData["tiendaId"] = new SelectList(_context.Tiendas, "idTienda", "idTienda", ropa.tiendaId);
+            ViewData["categoriaId"] = new SelectList(_context.Categorias, "idCategoria", "nombre", ropa.categoriaId);
+            ViewData["marcaId"] = new SelectList(_context.Marcas, "idMarca", "nombre", ropa.marcaId);
+            ViewData["tiendaId"] = new SelectList(_context.Tiendas, "idTienda", "nombre", ropa.tiendaId);
             return View(ropa);
         }
 
@@ -167,9 +167,9 @@ namespace eGym.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["categoriaId"] = new SelectList(_context.Categorias, "idCategoria", "idCategoria", ropa.categoriaId);
-            ViewData["marcaId"] = new SelectList(_context.Marcas, "idMarca", "idMarca", ropa.marcaId);
-            ViewData["tiendaId"] = new SelectList(_context.Tiendas, "idTienda", "idTienda", ropa.tiendaId);
+            ViewData["categoriaId"] = new SelectList(_context.Categorias, "idCategoria", "nombre", ropa.categoriaId);
+            ViewData["marcaId"] = new SelectList(_context.Marcas, "idMarca", "nombre", ropa.marcaId);
+            ViewData["tiendaId"] = new SelectList(_context.Tiendas, "idTienda", "nombre", ropa.tiendaId);
             return View(ropa);
         }
 

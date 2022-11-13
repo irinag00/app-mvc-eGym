@@ -17,30 +17,30 @@
                             <p class="card-text">
                                 <h5 class="card-title">
                                     @Html.DisplayFor(modelItem => item.nombre)
-                                    <a class="text-white float-right"><i class="bi bi-pencil-square"></i></a>
+                                    <a asp-action="Edit" asp-route-id="@item.idRopa" class="text-white float-right"><i class="bi bi-pencil-square"></i></a>
                                 </h5>
                             </p>
                         </div>
                     </div>
                     <div class="col-md-6">
                         @if (!string.IsNullOrEmpty(item.imagenRopa)){
-                            <img src="~/pictures/img-ropa/" width="100%" asp-append-version="true" />
+                            <img src="~/pictures/img-ropa/@item.imagenRopa" width="100%" asp-append-version="true" />
                         }
                     </div>
                     <div class="col-md-6">
                         <div class="card-body">
                             <p class="card-text"><b>@Html.DisplayNameFor(model => model.detalles): </b> @Html.DisplayFor(modelItem => item.detalles)</p>
-                            <p class="card-text"><b>@Html.DisplayNameFor(model => model.Categoria): </b> @Html.DisplayFor(modelItem => item.Categoria.idCategoria)</p>
-                            <p class="card-text"><b>@Html.DisplayNameFor(model => model.Marca): </b> @Html.DisplayFor(modelItem => item.Marca.idMarca)</p>
-                            <p class="card-text"><b>@Html.DisplayNameFor(model => model.Tienda): </b> @Html.DisplayFor(modelItem => item.Tienda.idTienda)</p>
-                            <p class="card-text">fdgdfg</p>
+                            <p class="card-text"><b>@Html.DisplayNameFor(model => model.Categoria): </b> @Html.DisplayFor(modelItem => item.Categoria.nombre)</p>
+                            <p class="card-text"><b>@Html.DisplayNameFor(model => model.Marca): </b> @Html.DisplayFor(modelItem => item.Marca.nombre)</p>
+                            <p class="card-text"><b>@Html.DisplayNameFor(model => model.Tienda): </b> @Html.DisplayFor(modelItem => item.Tienda.nombre)</p>
+                            <p class="card-text"><b>@Html.DisplayNameFor(model => model.ropas_colores): </b>@Html.DisplayFor(modelItem => item.ropas_colores)</p>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="card-footer">
                             <p class="card-text">
-                                <a class="btn btn-outline-primary float-right"><i class="bi bi-eye-fill"></i> Ver Detalles</a>
-                                <a class="btn btn-success text-white"><i class="bi bi-cart-plus"></i> Añadir al carrito ($(@Html.DisplayFor(modelItem => item.precio))</a>
+                                <a asp-action="Details" asp-route-id="@item.idRopa" class="btn btn-outline-primary float-right"><i class="bi bi-eye-fill"></i> Ver Detalles</a>
+                                <a class="btn btn-success text-white"><i class="bi bi-cart-plus"></i> Añadir al carrito ($@Html.DisplayFor(modelItem => item.precio))</a>
                             </p>
                         </div>
                     </div>

@@ -1,13 +1,63 @@
 ﻿@model eGym.Models.Ropa
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalle";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Ropa</h4>
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="card mb-12">
+            <div class="row g-0">
+                <div class="col-md-12">
+                    <div class="card-header text-white bg-info">
+                        <p class="card-text">
+                            <h5 class="card-title">
+                                @Html.DisplayFor(modelItem => Model.nombre)
+                            </h5>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    @if (!string.IsNullOrEmpty(Model.imagenRopa))
+                    {
+                        <img src="~/pictures/img-ropa/@Model.imagenRopa" width="100%" asp-append-version="true" />
+                    }
+                </div>
+                <div>
+                    <div class="card-body">
+                        <p class="card-text"><b>@Html.DisplayNameFor(model => model.detalles): </b> @Html.DisplayFor(modelItem => Model.detalles)</p>
+                        <p class="card-text"><b>@Html.DisplayNameFor(model => model.Categoria): </b> @Html.DisplayFor(modelItem => Model.Categoria.nombre)</p>
+                        <p class="card-text"><b>@Html.DisplayNameFor(model => model.Marca): </b> @Html.DisplayFor(modelItem => Model.Marca.nombre)</p>
+                        <p class="card-text"><b>@Html.DisplayNameFor(model => model.Tienda): </b> @Html.DisplayFor(modelItem => Model.Tienda.nombre)</p>
+                        <p class="card-text">
+                            <b>Colores: </b>
+                            <hr />
+                            <div class="row">
+                                @foreach (var color in Model.ropas_colores)
+                                {
+                                    <div class="column text-center">
+                                        <img class="border-info rounded-circle" src="@color.color.imagenColor" style="max-width: 150px" />
+                                        <br />
+                                        <a asp-controller="Colores" asp-action="Details" asp-route-id="@color.idColor">@color.color.nombre</a>
+                                    </div>
+                                }
+                            </div>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card-footer">
+                        <p class="card-text">
+                            <a asp-action="Details" asp-route-id="@Model.idRopa" class="btn btn-outline-primary float-right"><i class="bi bi-eye-fill"></i> Ver Detalles</a>
+                            <a class="btn btn-success text-white"><i class="bi bi-cart-plus"></i> Añadir al carrito ($@Html.DisplayFor(modelItem => Model.precio))</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    @*<h4>Ropa</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -52,8 +102,7 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Categoria.idCategoria)
         </dd>
-    </dl>
-</div>
+    </dl>*@
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.idRopa">Edit</a> |
     <a asp-action="Index">Back to List</a>

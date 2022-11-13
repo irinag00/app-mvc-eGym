@@ -59,7 +59,7 @@ namespace eGym
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Ropas}/{action=Index}/{id?}");
             });
         }
     }
