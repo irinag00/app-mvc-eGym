@@ -1,35 +1,35 @@
 ﻿@model eGym.ModelsView.paginador
 
-@*Total de registros encontrados: @Model.cantReg*@
+Total de registros encontrados: @Model.CantidadRegistros
 
-@*<nav aria-label="...">
+<nav aria-label="...">
     <ul class="pagination justify-content-center">
-        @if (Model.pagActual != 1)
+        @if (Model.PaginaActual != 1)
         {
             <li class="page-item">
                 <a class="page-link" asp-all-route-data="@Model.ValoresQueryString" asp-route-pagina="1" tabindex="-1">Inicio</a>
             </li>
             <li class="page-item">
-                <a class="page-link" asp-all-route-data="@Model.ValoresQueryString" asp-route-pagina="@(Model.pagActual-1)" tabindex="-1">Anterior</a>
+                <a class="page-link" asp-all-route-data="@Model.ValoresQueryString" asp-route-pagina="@(Model.PaginaActual-1)" tabindex="-1">Anterior</a>
             </li>
-            <li class="page-item"><a class="page-link" asp-all-route-data="@Model.ValoresQueryString" asp-route-pagina="@(Model.pagActual-1)">@(Model.pagActual - 1)</a></li>
+            <li class="page-item"><a class="page-link" asp-all-route-data="@Model.ValoresQueryString" asp-route-pagina="@(Model.PaginaActual-1)">@(Model.PaginaActual - 1)</a></li>
         }
 
         <li class="page-item active">
-            <a class="page-link">@(Model.pagActual)<span class="sr-only">(current)</span></a>
+            <a class="page-link">@(Model.PaginaActual)<span class="sr-only">@*(current)*@</span></a>
         </li>
 
-        @if (Model.pagActual < Model.totalPag)
+        @if (Model.PaginaActual < Model.TotalPaginas)
         {
-            <li class="page-item"><a class="page-link" asp-route-pagina="@(Model.pagActual+1)">@(Model.pagActual + 1)</a></li>
+            <li class="page-item"><a class="page-link" asp-route-pagina="@(Model.PaginaActual+1)">@(Model.PaginaActual + 1)</a></li>
             <li class="page-item">
-                <a class="page-link" asp-all-route-data="@Model.ValoresQueryString" asp-route-pagina="@(Model.pagActual+1)">Siguiente</a>
+                <a class="page-link" asp-all-route-data="@Model.ValoresQueryString" asp-route-pagina="@(Model.PaginaActual+1)">Siguiente</a>
             </li>
             <li class="page-item">
-                <a class="page-link" asp-all-route-data="@Model.ValoresQueryString" asp-route-pagina="@(Model.totalPag)">Ultima</a>
+                <a class="page-link" asp-all-route-data="@Model.ValoresQueryString" asp-route-pagina="@(Model.TotalPaginas)">Ultima</a>
             </li>
         }
 
     </ul>
-</nav>*@
+</nav>
 

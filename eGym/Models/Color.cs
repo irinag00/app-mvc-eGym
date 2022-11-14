@@ -12,6 +12,6 @@ namespace eGym.Models
         public string? imagenColor { get; set;}
 
         //relaciones
-        public List<Ropa_Color> ropas_colores { get; set; }
+        public List<Ropa_Color> ? ropas_colores { get; set; }
     }
 }

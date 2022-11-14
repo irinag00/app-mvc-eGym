@@ -9,16 +9,18 @@ namespace eGym.ModelsView
         public List<Ropa> ListaRopa { get; set; }
         public SelectList ListaCategoria { get; set; }
         public int? categoriaId { get; set; }
+        public SelectList ListaTienda { get; set; }
+        public int? tiendaId { get; set; }
         public string busqNombre { get; set; }
-        //public paginador paginador { get; set; }
+        public paginador paginador { get; set; }/* = new paginador();*/
     }
 
     public class paginador
     {
-        public int ? cantReg { get; set; }
-        public int regXpag { get; set; }
-        public int pagActual { get; set; }
-        public int totalPag => (int)Math.Ceiling((decimal)cantReg / regXpag);
+        public int PaginaActual { get; set; }
+        public int CantidadRegistros { get; set; }
+        public int RegistrosxPagina { get; set; }
+        public int TotalPaginas => (int)Math.Ceiling((decimal) CantidadRegistros / RegistrosxPagina);
         public Dictionary<string, string> ValoresQueryString { get; set; } = new Dictionary<string, string>();
     }
 

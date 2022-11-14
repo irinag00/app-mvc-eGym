@@ -22,43 +22,40 @@ namespace eGym.Controllers
         }
 
         // GET: Ropas
-        public async Task<IActionResult> Index(string busqNombre, int? categoriaId)
+        public async Task<IActionResult> Index(string busqNombre, int? categoriaId, int pagina= 1)
         {
-            //paginador paginador = new paginador()
-            //{
-            //    pagActual = pagina,
-            //    regXpag = 5
-            //};
+            paginador paginador = new paginador()
+            {
+                PaginaActual = pagina,
+                RegistrosxPagina = 5
+            };
 
-            var consulta = _context.Ropas.Include(a => a.Categoria).Select(a => a);
+            var consultaCategoria = _context.Ropas.Include(a => a.Categoria).Select(a => a) ;
             if (!string.IsNullOrEmpty(busqNombre))
             {
-                consulta = consulta.Where(e => e.nombre.Contains(busqNombre));
+                consultaCategoria = consultaCategoria.Where(e => e.nombre.Contains(busqNombre));
             }
 
             if (categoriaId.HasValue)
             {
-                consulta = consulta.Where(e => e.categoriaId == categoriaId);
+                consultaCategoria = consultaCategoria.Where(e => e.categoriaId == categoriaId);
             }
 
-            //paginador.cantReg = consulta.Count();
+            paginador.CantidadRegistros = consultaCategoria.Count();
 
-            ////paginador.totalPag = (int)Math.Ceiling((decimal)paginador.cantReg / paginador.regXpag);
+            var datosAMostrar = consultaCategoria.Include(r => r.Marca).Include(r => r.Tienda)
+                .Skip((paginador.PaginaActual - 1) * paginador.RegistrosxPagina)
+                .Take(paginador.RegistrosxPagina);
 
-            //    .Skip((paginador.pagActual - 1) * paginador.regXpag)
-            //    .Take(paginador.regXpag);
-
-            //foreach (var item in Request.Query)
-            //    paginador.ValoresQueryString.Add(item.Key, item.Value);
-            var datosAMostrar = consulta.Include(r => r.Marca).Include(r => r.Tienda);
+            foreach (var item in Request.Query)
+                paginador.ValoresQueryString.Add(item.Key, item.Value);
 
             RopaViewModel Datos = new()
             {
                 ListaRopa = await datosAMostrar.ToListAsync(),
                 ListaCategoria = new SelectList(_context.Categorias, "idCategoria", "nombre", categoriaId),
                 busqNombre = busqNombre,
-                //paginador = paginador,
-                categoriaId = categoriaId
+                paginador = paginador
             };
             return View(Datos);
             //var appDbContext = _context.Ropas.Include(r => r.Categoria).Include(r => r.Marca).Include(r => r.Tienda);
