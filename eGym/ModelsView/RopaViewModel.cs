@@ -1,4 +1,5 @@
 ﻿using eGym.Models;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace eGym.ModelsView
@@ -9,7 +10,7 @@ namespace eGym.ModelsView
         public SelectList ListaCategoria { get; set; }
         public int? categoriaId { get; set; }
         public string busqNombre { get; set; }
-        public paginador paginador { get; set; }
+        //public paginador paginador { get; set; }
     }
 
     public class paginador

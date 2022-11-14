@@ -22,21 +22,21 @@ namespace eGym.Controllers
         }
 
         // GET: Categorias
-        public async Task<IActionResult> Index(int pagina= 1)
+        public async Task<IActionResult> Index(/*int pagina= 1*/)
         {
-            paginador paginador = new paginador()
-            {
-                cantReg = _context.Categorias.Count(),
-                pagActual = pagina,
-                regXpag = 1
-            };
-            ViewData["paginador"] = paginador;
+            //paginador paginador = new paginador()
+            //{
+            //    cantReg = _context.Categorias.Count(),
+            //    pagActual = pagina,
+            //    regXpag = 1
+            //};
+            //ViewData["paginador"] = paginador;
 
-            var datosAmostrar = _context.Categorias
-                .Skip((paginador.pagActual - 1) * paginador.regXpag)
-                .Take(paginador.regXpag);
+            //var datosAmostrar = _context.Categorias
+            //    .Skip((paginador.pagActual - 1) * paginador.regXpag)
+            //    .Take(paginador.regXpag);
 
-            return View(await datosAmostrar.ToListAsync());
+            return View(await _context.Categorias.ToListAsync());
         }
 
         // GET: Categorias/Details/5

@@ -22,49 +22,50 @@ namespace eGym.Controllers
         }
 
         // GET: Ropas
-        public async Task<IActionResult> Index(string busqNombre, int? categoriaId, int pagina = 1)
+        public async Task<IActionResult> Index(string busqNombre, int? categoriaId)
         {
-            paginador paginador = new paginador()
-            {
-                pagActual = pagina,
-                regXpag = 5
-            };
+            //paginador paginador = new paginador()
+            //{
+            //    pagActual = pagina,
+            //    regXpag = 5
+            //};
 
             var consulta = _context.Ropas.Include(a => a.Categoria).Select(a => a);
             if (!string.IsNullOrEmpty(busqNombre))
             {
                 consulta = consulta.Where(e => e.nombre.Contains(busqNombre));
-                //paginador.ValoresQueryString.Add("busqNombre", busqNombre);
             }
-            
+
             if (categoriaId.HasValue)
             {
                 consulta = consulta.Where(e => e.categoriaId == categoriaId);
-                //paginador.ValoresQueryString.Add("carreraId", carreraId.ToString());
             }
 
-            paginador.cantReg = consulta.Count();
+            //paginador.cantReg = consulta.Count();
 
-            //paginador.totalPag = (int)Math.Ceiling((decimal)paginador.cantReg / paginador.regXpag);
-            var datosAmostrar = consulta
-                .Skip((paginador.pagActual - 1) * paginador.regXpag)
-                .Take(paginador.regXpag);
+            ////paginador.totalPag = (int)Math.Ceiling((decimal)paginador.cantReg / paginador.regXpag);
 
-            foreach (var item in Request.Query)
-                paginador.ValoresQueryString.Add(item.Key, item.Value);
+            //    .Skip((paginador.pagActual - 1) * paginador.regXpag)
+            //    .Take(paginador.regXpag);
 
-            RopaViewModel Datos = new RopaViewModel()
+            //foreach (var item in Request.Query)
+            //    paginador.ValoresQueryString.Add(item.Key, item.Value);
+            var datosAMostrar = consulta.Include(r => r.Marca).Include(r => r.Tienda);
+
+            RopaViewModel Datos = new()
             {
-                ListaRopa = datosAmostrar.ToList(),
-                ListaCategoria = new SelectList(_context.Categorias, "id", "nombre", categoriaId),
+                ListaRopa = await datosAMostrar.ToListAsync(),
+                ListaCategoria = new SelectList(_context.Categorias, "idCategoria", "nombre", categoriaId),
                 busqNombre = busqNombre,
-                paginador = paginador,
+                //paginador = paginador,
                 categoriaId = categoriaId
             };
-
             return View(Datos);
             //var appDbContext = _context.Ropas.Include(r => r.Categoria).Include(r => r.Marca).Include(r => r.Tienda);
             //return View(await appDbContext.ToListAsync());
+            //ViewData["categoriaId"] = new SelectList(_context.Categorias, "idCategoria", "nombre");
+            //var appDbContext = consulta.Include(r => r.Marca).Include(r => r.Tienda);
+
         }
 
         // GET: Ropas/Details/5
