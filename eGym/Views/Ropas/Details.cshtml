@@ -34,7 +34,7 @@
                             <hr />
                             <div class="row">
                                 <p>@Html.DisplayFor(modelItem => Model.ropas_colores)</p>
-                                @foreach (var color in Model.ropas_colores) 
+                                @foreach (var Color in Model.ropas_colores) 
                                 {
                                     <div class="column text-center">
                                        @* @if (!string.IsNullOrEmpty(@color.color.imagenColor))
@@ -42,8 +42,8 @@
                                             <img src="~/pictures/img-colores/@color.color.imagenColor" class="rounded-circle" style="max-width:150px" asp-append-version="true" />
                                         }
                                         @*<img class="border-info rounded-circle" src="@color.color.imagenColor" style="max-width: 150px" />*@
-                                       
-                                        <a asp-controller="Colores" asp-action="Details" asp-route-id="@color.idColor">@color.idColor</a>
+
+                                        <a asp-controller="Colores" asp-action="Details" asp-route-id="@Color.idColor">@Html.DisplayFor(modelItem => Color.color.nombre)</a>
                                     </div>
                                 }
                             </div>
