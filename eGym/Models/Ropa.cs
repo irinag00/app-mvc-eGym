@@ -24,13 +24,13 @@ namespace eGym.Models
         [Display(Name = "Marca")]
         public int marcaId { get; set; }
         [ForeignKey("marcaId")]
-        public Marca ? Marca { get; set; }
+        public Marca Marca { get; set; }
 
         //relacion-tienda
         [Display(Name = "Tienda")]
         public int tiendaId { get; set; }
         [ForeignKey("tiendaId")]
-        public Tienda ? Tienda { get; set; }
+        public Tienda Tienda { get; set; }
 
         //relacion-categoria
         [Display(Name = "Categoría")]

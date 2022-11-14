@@ -7,13 +7,14 @@ namespace eGym.ModelsView
     {
         public List<Ropa> ListaRopa { get; set; }
         public SelectList ListaCategoria { get; set; }
+        public int? categoriaId { get; set; }
         public string busqNombre { get; set; }
         public paginador paginador { get; set; }
     }
 
     public class paginador
     {
-        public int cantReg { get; set; }
+        public int ? cantReg { get; set; }
         public int regXpag { get; set; }
         public int pagActual { get; set; }
         public int totalPag => (int)Math.Ceiling((decimal)cantReg / regXpag);

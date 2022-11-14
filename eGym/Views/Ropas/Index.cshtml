@@ -12,7 +12,7 @@
     <p>
         Filtros:<br />
         Nombre: <input type="text" name="busqNombre" value="@Model.busqNombre"/>
-        Categoría: <select name="categoriaId" asp-items="@Model.ListaCategoria">
+@*        Categoría: <select name="categoriaId" asp-items="@Model.ListaCategoria">*@
             <option value="">Todas</option>
         </select>
         <input type="submit" value="Filtrar" />
@@ -42,7 +42,8 @@
                         <div class="card-body">
                             <p class="card-text"><b>@Html.DisplayNameFor(model => model.ListaRopa[0].detalles): </b> @Html.DisplayFor(modelItem => item.detalles)</p>
                             <p class="card-text">
-                                <b>@Html.DisplayNameFor(model => model.ListaRopa[0].Categoria): </b> <a asp-controller="Categorias" asp-action="Details" asp-route-id="@item.categoriaId">
+                                <b>@Html.DisplayNameFor(model => model.ListaRopa[0].Categoria): </b> 
+                                <a asp-controller="Categorias" asp-action="Details" asp-route-id="@item.categoriaId">
                                     @Html.DisplayFor(modelItem => item.Categoria.nombre)
                                 </a>
                             </p>

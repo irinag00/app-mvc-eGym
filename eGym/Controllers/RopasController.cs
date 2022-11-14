@@ -58,7 +58,8 @@ namespace eGym.Controllers
                 ListaRopa = datosAmostrar.ToList(),
                 ListaCategoria = new SelectList(_context.Categorias, "id", "nombre", categoriaId),
                 busqNombre = busqNombre,
-                paginador = paginador
+                paginador = paginador,
+                categoriaId = categoriaId
             };
 
             return View(Datos);

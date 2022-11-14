@@ -36,7 +36,7 @@ namespace eGym.Controllers
                 .Skip((paginador.pagActual - 1) * paginador.regXpag)
                 .Take(paginador.regXpag);
 
-            return View(await _context.Categorias.ToListAsync());
+            return View(await datosAmostrar.ToListAsync());
         }
 
         // GET: Categorias/Details/5
