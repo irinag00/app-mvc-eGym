@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using eGym.Models;
+using eGym.ModelsView;
 
 namespace eGym.Controllers
 {
@@ -21,10 +22,48 @@ namespace eGym.Controllers
         }
 
         // GET: Ropas
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string busqNombre, int? categoriaId, int pagina = 1)
         {
-            var appDbContext = _context.Ropas.Include(r => r.Categoria).Include(r => r.Marca).Include(r => r.Tienda);
-            return View(await appDbContext.ToListAsync());
+            paginador paginador = new paginador()
+            {
+                pagActual = pagina,
+                regXpag = 5
+            };
+
+            var consulta = _context.Ropas.Include(a => a.Categoria).Select(a => a);
+            if (!string.IsNullOrEmpty(busqNombre))
+            {
+                consulta = consulta.Where(e => e.nombre.Contains(busqNombre));
+                //paginador.ValoresQueryString.Add("busqNombre", busqNombre);
+            }
+            
+            if (categoriaId.HasValue)
+            {
+                consulta = consulta.Where(e => e.categoriaId == categoriaId);
+                //paginador.ValoresQueryString.Add("carreraId", carreraId.ToString());
+            }
+
+            paginador.cantReg = consulta.Count();
+
+            //paginador.totalPag = (int)Math.Ceiling((decimal)paginador.cantReg / paginador.regXpag);
+            var datosAmostrar = consulta
+                .Skip((paginador.pagActual - 1) * paginador.regXpag)
+                .Take(paginador.regXpag);
+
+            foreach (var item in Request.Query)
+                paginador.ValoresQueryString.Add(item.Key, item.Value);
+
+            RopaViewModel Datos = new RopaViewModel()
+            {
+                ListaRopa = datosAmostrar.ToList(),
+                ListaCategoria = new SelectList(_context.Categorias, "id", "nombre", categoriaId),
+                busqNombre = busqNombre,
+                paginador = paginador
+            };
+
+            return View(Datos);
+            //var appDbContext = _context.Ropas.Include(r => r.Categoria).Include(r => r.Marca).Include(r => r.Tienda);
+            //return View(await appDbContext.ToListAsync());
         }
 
         // GET: Ropas/Details/5

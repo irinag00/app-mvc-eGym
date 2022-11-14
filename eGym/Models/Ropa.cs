@@ -36,7 +36,7 @@ namespace eGym.Models
         [Display(Name = "Categoría")]
         public int categoriaId { get; set; }
         [ForeignKey("categoriaId")]
-        public Categoria? Categoria { get; set; }
+        public Categoria Categoria { get; set; }
 
     }
 }

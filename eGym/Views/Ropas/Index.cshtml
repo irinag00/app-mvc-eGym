@@ -1,4 +1,5 @@
-﻿@model IEnumerable<eGym.Models.Ropa>
+﻿@*@model IEnumerable<eGym.Models.Ropa>*@
+@model eGym.ModelsView.RopaViewModel
 
 @{
     ViewData["Title"] = "Lista de Indumentaria";
@@ -7,8 +8,18 @@
 <p>
     <a asp-action="Create">Crear Nuevo</a>
 </p>
+<form asp-action="Index" method="get">
+    <p>
+        Filtros:<br />
+        Nombre: <input type="text" name="busqNombre" value="@Model.busqNombre"/>
+        Categoría: <select name="categoriaId" asp-items="@Model.ListaCategoria">
+            <option value="">Todas</option>
+        </select>
+        <input type="submit" value="Filtrar" />
+    </p>
+</form>
 <div class="row">
-    @foreach (var item in Model){
+    @foreach (var item in Model.ListaRopa){
         <div class="col-md-4 col-xs-6 border-primary mb-3">
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
@@ -29,18 +40,20 @@
                     </div>
                     <div class="col-md-6">
                         <div class="card-body">
-                            <p class="card-text"><b>@Html.DisplayNameFor(model => model.detalles): </b> @Html.DisplayFor(modelItem => item.detalles)</p>
+                            <p class="card-text"><b>@Html.DisplayNameFor(model => model.ListaRopa[0].detalles): </b> @Html.DisplayFor(modelItem => item.detalles)</p>
                             <p class="card-text">
-                                <b>@Html.DisplayNameFor(model => model.Categoria): </b> <a asp-controller="Categorias" asp-action="Details" asp-route-id="@item.categoriaId">
+                                <b>@Html.DisplayNameFor(model => model.ListaRopa[0].Categoria): </b> <a asp-controller="Categorias" asp-action="Details" asp-route-id="@item.categoriaId">
                                     @Html.DisplayFor(modelItem => item.Categoria.nombre)
                                 </a>
                             </p>
-                            <p class="card-text"><b>@Html.DisplayNameFor(model => model.Marca): </b> 
+                            <p class="card-text">
+                                <b>@Html.DisplayNameFor(model => model.ListaRopa[0].Marca): </b>
                                 <a asp-controller="Marcas" asp-action="Details" asp-route-id="@item.marcaId">
                                     @Html.DisplayFor(modelItem => item.Marca.nombre)
                                 </a>
                             </p>
-                            <p class="card-text"><b>@Html.DisplayNameFor(model => model.Tienda): </b>
+                            <p class="card-text">
+                                <b>@Html.DisplayNameFor(model => model.ListaRopa[0].Tienda): </b>
                                 <a asp-controller="Tiendas" asp-action="Details" asp-route-id="@item.tiendaId">
                                     @Html.DisplayFor(modelItem => item.Tienda.nombre)
                                 </a>
@@ -60,6 +73,7 @@
         </div>
     }
 </div>
+<partial name="_paginador" for="@ViewData["paginador"]" />
 @*<table class="table">
     <thead>
         <tr>

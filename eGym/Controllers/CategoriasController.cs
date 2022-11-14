@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using eGym.Models;
+using eGym.ModelsView;
 
 namespace eGym.Controllers
 {
@@ -21,9 +22,21 @@ namespace eGym.Controllers
         }
 
         // GET: Categorias
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pagina= 1)
         {
-              return View(await _context.Categorias.ToListAsync());
+            paginador paginador = new paginador()
+            {
+                cantReg = _context.Categorias.Count(),
+                pagActual = pagina,
+                regXpag = 1
+            };
+            ViewData["paginador"] = paginador;
+
+            var datosAmostrar = _context.Categorias
+                .Skip((paginador.pagActual - 1) * paginador.regXpag)
+                .Take(paginador.regXpag);
+
+            return View(await _context.Categorias.ToListAsync());
         }
 
         // GET: Categorias/Details/5
