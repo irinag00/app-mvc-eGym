@@ -4,9 +4,9 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h1>Eliminar elemento</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Desea eliminar este elemento?</h3>
 <div>
     <h4>Color</h4>
     <hr />
@@ -20,14 +20,15 @@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.imagenColor)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.imagenColor)
-        </dd>
+        <dt class="col-sm-2">
+            <input type="hidden" name="foto" id="foto" value="@Model.imagenColor" />
+            <img src="@(!string.IsNullOrEmpty(Model.imagenColor) ? "/pictures/img-colores/"+Model.imagenColor : "")" id="imagen" class="rounded-circle" style="max-width:150px" />
+        </dt>
     </dl>
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="idColor" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a class="btn btn-outline-dark" asp-action="Index"><i class="bi bi-arrow-return-left"></i> Volver a la Lista</a>
     </form>
 </div>
