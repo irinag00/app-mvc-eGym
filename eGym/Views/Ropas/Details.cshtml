@@ -9,10 +9,11 @@
         <div class="card mb-12">
             <div class="row g-0">
                 <div class="col-md-12">
-                    <div class="card-header text-white bg-info">
+                    <div class="card-header bg-dark text-white">
                         <p class="card-text">
                             <h5 class="card-title">
                                 @Html.DisplayFor(modelItem => Model.nombre)
+                                <a asp-action="Edit" asp-route-id="@Model.idRopa" class="text-white float-right"><i class="bi bi-pencil-square"></i></a>
                             </h5>
                         </p>
                     </div>
@@ -104,6 +105,5 @@
         </dd>
     </dl>*@
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.idRopa">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-outline-dark" asp-action="Index"><i class="bi bi-arrow-return-left"></i> Volver a la Lista</a>
 </div>
