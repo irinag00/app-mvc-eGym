@@ -10,6 +10,6 @@ namespace eGym.Models
         public string nombre { get; set; }
 
         //relaciones
-        public List<Ropa> Ropas { get; set; }
+        public List<Ropa> ? Ropas { get; set; }
     }
 }

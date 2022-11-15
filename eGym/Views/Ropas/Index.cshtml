@@ -4,23 +4,22 @@
 @{
     ViewData["Title"] = "Lista de Indumentaria";
 }
+<div class="row">
+    <div class="col-lg-6">
+        <form asp-action="Index" method="get">
+                <div class="input-group">
+                    <input type="text" class="form-control" asp-for="busqNombre" value="@Model.busqNombre" placeholder="¿Qué estas buscando?" />
+                    <select name="categoriaId" class="form-control" asp-items="@Model.ListaCategoria">
+                        <option value="" aria-label="Recipient's username" aria-describedby="button-addon2">Todas</option>
+                    </select>
+                    <button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
+                </div>
+           </form>
+   </div>
+</div>
+@*<img src="~/pictures/Presentacion/Informe anual.jpg"/>*@
 
-<p>
-    <a asp-action="Create">Crear Nuevo</a>
-</p>
-
-<form asp-action="Index" method="get">
-    <p>
-        Filtros:<br />
-        Nombre: <input type="text" asp-for="busqNombre" value="@Model.busqNombre"/>
-        Categoría:
-        <select name="categoriaId" asp-items="@Model.ListaCategoria">
-            <option value="">Todas</option>
-        </select>
-        <input type="submit" value="Filtrar" />
-    </p> 
-</form>
-
+<br />
 <div class="row">
     @foreach (var item in Model.ListaRopa){
         <div class="col-md-4 col-xs-6 border-danger mb-3">
@@ -81,4 +80,7 @@
         </div>
     }
 </div>
+<p>
+    <a asp-action="Create">Crear Nuevo</a>
+</p>
 <partial name="_paginador" for="@Model.paginador]">

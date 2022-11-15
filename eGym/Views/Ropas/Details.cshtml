@@ -27,9 +27,21 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <p class="card-text"><b>@Html.DisplayNameFor(model => model.detalles): </b> @Html.DisplayFor(modelItem => Model.detalles)</p>
-                        <p class="card-text"><b>@Html.DisplayNameFor(model => model.Categoria): </b> @Html.DisplayFor(modelItem => Model.Categoria.nombre)</p>
-                        <p class="card-text"><b>@Html.DisplayNameFor(model => model.Marca): </b> @Html.DisplayFor(modelItem => Model.Marca.nombre)</p>
-                        <p class="card-text"><b>@Html.DisplayNameFor(model => model.Tienda): </b> @Html.DisplayFor(modelItem => Model.Tienda.nombre)</p>
+                        <p class="card-text"><b>@Html.DisplayNameFor(model => model.Categoria): </b> 
+                            <a asp-controller="Categorias" asp-action="Details" asp-route-id="@Model.categoriaId">
+                                @Html.DisplayFor(modelItem => Model.Categoria.nombre)
+                            </a>
+                        </p>
+                        <p class="card-text"><b>@Html.DisplayNameFor(model => model.Marca): </b> 
+                            <a asp-controller="Categorias" asp-action="Details" asp-route-id="@Model.marcaId">
+                                @Html.DisplayFor(modelItem => Model.Marca.nombre)
+                            </a>
+                        </p>
+                        <p class="card-text"><b>@Html.DisplayNameFor(model => model.Tienda): </b> 
+                            <a asp-controller="Categorias" asp-action="Details" asp-route-id="@Model.tiendaId">
+                                @Html.DisplayFor(modelItem => Model.Tienda.nombre)
+                            </a>
+                        </p>
                         <p class="card-text">
                             <b>Colores: </b>
                             <hr />

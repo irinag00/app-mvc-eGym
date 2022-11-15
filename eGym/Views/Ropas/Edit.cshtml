@@ -1,10 +1,10 @@
 ﻿@model eGym.Models.Ropa
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar";
 }
 
-<h1>Edit</h1>
+<h1>Editar</h1>
 
 <h4>Ropa</h4>
 <hr />
@@ -56,10 +56,60 @@
             </div>
         </form>
     </div>
+    <table class="table">
+        <h4>Relación de Colores:</h4>
+        <thead>
+            <tr>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.imagenRopa)
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.nombre)
+                </th>
+                <th class="text-center">
+                    Imagen 
+                </th>
+                <th class="text-center">
+                    Nombre
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ropas_colores)
+            {
+                <tr>
+                    <td class="align-middle">
+                        @if (!string.IsNullOrEmpty(item.ropa.imagenRopa))
+                        {
+                            <img src="~/pictures/img-ropa/@item.ropa.imagenRopa" class="rounded-circle" style="max-width:150px" asp-append-version="true" />
+                        }
+                    </td>
+                    <td class="align-middle">
+                        @Html.DisplayFor(modelItem => item.ropa.nombre)
+                    </td>
+                    <td class="align-middle">
+                        @if (!string.IsNullOrEmpty(item.color.imagenColor))
+                        {
+                            <img src="~/pictures/img-colores/@item.color.imagenColor" class="rounded-circle" style="max-width:150px" asp-append-version="true" />
+                        }
+                    </td>
+                    <td class="align-middle">
+                        @Html.DisplayFor(modelItem => item.color.nombre)
+                    </td>
+                    @*                    <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-outline-dark" asp-action="Index"><i class="bi bi-arrow-return-left"></i> Volver a la Lista</a>
 </div>
 
 @section Scripts {

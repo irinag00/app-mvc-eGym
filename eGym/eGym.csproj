@@ -23,6 +23,7 @@
     <Folder Include="wwwroot\pictures\img-ropa\" />
     <Folder Include="wwwroot\pictures\img-marca\" />
     <Folder Include="wwwroot\pictures\img-tienda\" />
+    <Folder Include="wwwroot\pictures\Presentacion\" />
   </ItemGroup>
 
 </Project>

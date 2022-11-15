@@ -27,7 +27,7 @@ namespace eGym.Controllers
             paginador paginador = new paginador()
             {
                 PaginaActual = pagina,
-                RegistrosxPagina = 5
+                RegistrosxPagina = 3
             };
 
             var consultaCategoria = _context.Ropas.Include(a => a.Categoria).Select(a => a) ;
@@ -141,8 +141,7 @@ namespace eGym.Controllers
                 return NotFound();
             }
 
-            var ropa = await _context.Ropas.Include(x => x.ropas_colores)
-                .ThenInclude(m=> m.color)
+            var ropa = await _context.Ropas.Include(x => x.ropas_colores).ThenInclude(m=> m.color)
                 .FirstOrDefaultAsync(e=>e.idRopa == id);
                 //FindAsync(id);
             if (ropa == null)
