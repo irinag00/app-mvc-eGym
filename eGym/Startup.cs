@@ -1,15 +1,6 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using eGym.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace eGym
 {
@@ -32,7 +23,14 @@ namespace eGym
              ));
             //---------------------------------------------
 
+            services.AddDefaultIdentity<IdentityUser>(
+                options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
+
             services.AddControllersWithViews();
+
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +51,8 @@ namespace eGym
 
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -60,6 +60,7 @@ namespace eGym
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Ropas}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace eGym.Models
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext
     { 
         public AppDbContext(DbContextOptions<AppDbContext> options) 
             : base(options)
@@ -11,6 +12,8 @@ namespace eGym.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Ropa_Color>().HasKey(am => new
             {
                 am.idRopa,
@@ -23,7 +26,6 @@ namespace eGym.Models
             modelBuilder.Entity<Ropa_Color>().HasOne(m => m.color).WithMany(am => am.ropas_colores)
                 .HasForeignKey(m => m.idColor);
 
-            base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<Ropa> Ropas { get; set; }
