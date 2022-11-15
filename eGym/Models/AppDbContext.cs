@@ -14,7 +14,7 @@ namespace eGym.Models
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Ropa_Color>().HasKey(am => new
+            modelBuilder.Entity<Ropa_Color>().HasKey(am => new 
             {
                 am.idRopa,
                 am.idColor

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using eGym.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace eGym
 {
@@ -22,11 +23,19 @@ namespace eGym
             Configuration.GetConnectionString("DefaultConnection")
              ));
             //---------------------------------------------
-
+           
+            //Authentication and authorization
             services.AddDefaultIdentity<IdentityUser>(
                 options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>();
+           
+            services.AddMemoryCache();
+            services.AddSession();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            });
 
             services.AddControllersWithViews();
 
@@ -62,6 +71,8 @@ namespace eGym
                     pattern: "{controller=Ropas}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+            //Seed database
+            AppDbContextSeed.SeedRoleAsync(app).Wait();
         }
     }
 }
