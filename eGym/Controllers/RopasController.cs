@@ -78,6 +78,7 @@ namespace eGym.Controllers
                 .Include(r => r.Marca)
                 .Include(r => r.Tienda)
                 .Include(r => r.ropas_colores)
+                .ThenInclude(m => m.color)
                 .FirstOrDefaultAsync(m => m.idRopa == id);
             if (ropa == null)
             {
@@ -140,7 +141,10 @@ namespace eGym.Controllers
                 return NotFound();
             }
 
-            var ropa = await _context.Ropas.FindAsync(id);
+            var ropa = await _context.Ropas.Include(x => x.ropas_colores)
+                .ThenInclude(m=> m.color)
+                .FirstOrDefaultAsync(e=>e.idRopa == id);
+                //FindAsync(id);
             if (ropa == null)
             {
                 return NotFound();

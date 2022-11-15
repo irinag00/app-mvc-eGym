@@ -17,13 +17,13 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-md-6 justify-content-center">
+                <div class="col-md-4" justify-content-center">
                     @if (!string.IsNullOrEmpty(Model.imagenRopa))
                     {
-                        <img src="~/pictures/img-ropa/@Model.imagenRopa" width="150%" asp-append-version="true" />
+                        <img src="~/pictures/img-ropa/@Model.imagenRopa" width="100%" asp-append-version="true" />
                     }
                 </div>
-                <div>
+                <div class="col-md-8">
                     <div class="card-body">
                         <p class="card-text"><b>@Html.DisplayNameFor(model => model.detalles): </b> @Html.DisplayFor(modelItem => Model.detalles)</p>
                         <p class="card-text"><b>@Html.DisplayNameFor(model => model.Categoria): </b> @Html.DisplayFor(modelItem => Model.Categoria.nombre)</p>
@@ -32,18 +32,14 @@
                         <p class="card-text">
                             <b>Colores: </b>
                             <hr />
-                            <div class="row">
-                                <p>@Html.DisplayFor(modelItem => Model.ropas_colores)</p>
+                            <div class="row align-items">
                                 @foreach (var Color in Model.ropas_colores) 
                                 {
                                     <div class="column text-center">
-                                       @* @if (!string.IsNullOrEmpty(@color.color.imagenColor))
-                                        {
-                                            <img src="~/pictures/img-colores/@color.color.imagenColor" class="rounded-circle" style="max-width:150px" asp-append-version="true" />
-                                        }
-                                        @*<img class="border-info rounded-circle" src="@color.color.imagenColor" style="max-width: 150px" />*@
+                                            <img class="border-info rounded-circle" src="~/pictures/img-colores/@Color.color.imagenColor" style="max-width:150px" asp-append-version="true" />
 
-                                        <a asp-controller="Colores" asp-action="Details" asp-route-id="@Color.idColor">@Html.DisplayFor(modelItem => Color.color.nombre)</a>
+                                        <br />
+                                        <a asp-controller="Colores" asp-action="Details" asp-route-id="@Color.idColor">@Color.color.nombre</a>
                                     </div>
                                 }
                             </div>
@@ -53,7 +49,7 @@
                 <div class="col-md-12">
                     <div class="card-footer">
                         <p class="card-text">
-                            <a class="btn btn-success text-white"><i class="bi bi-cart-plus"></i> Añadir al carrito ($@Html.DisplayFor(modelItem => Model.precio))</a>
+                            <a class="btn btn-outline-danger"><i class="bi bi-bookmark-heart"></i> Añadir a Favoritos ($@Html.DisplayFor(modelItem => Model.precio))</a>
                         </p>
                     </div>
                 </div>
