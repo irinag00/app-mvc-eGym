@@ -28,7 +28,7 @@ namespace eGym
             //Db context configuration
             services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(
-            Configuration.GetConnectionString("cadenaSQLServer")
+            Configuration.GetConnectionString("DefaultConnection")
              ));
             //---------------------------------------------
 
