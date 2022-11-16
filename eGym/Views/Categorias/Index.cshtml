@@ -1,10 +1,20 @@
-﻿@model IEnumerable<eGym.Models.Categoria>
+﻿@*@model IEnumerable<eGym.Models.Categoria>*@
+@model eGym.ModelsView.CategoriaViewModel
 
 @{
     ViewData["Title"] = "Lista de Categorías";
 }
 
 <h1>Index</h1>
+<div class="col-lg-6">
+    <form asp-action="Index" method="get">
+        <div class="input-group">
+            <input type="text" class="form-control" asp-for="busqNombre" value="@Model.busqNombre" placeholder="¿Qué estas buscando?" />
+            <button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
+        </div>
+    </form>
+</div>
+<br />
 
 <div class="row">
     <div class="col-md-8 offset-md-2">
@@ -12,13 +22,13 @@
             <thead>
                 <tr>
                     <th class="text-center">
-                        @Html.DisplayNameFor(model => model.nombre)
+                        @Html.DisplayNameFor(model => model.ListaCategoria[0].nombre)
                     </th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-        @foreach (var item in Model) {
+        @foreach (var item in Model.ListaCategoria) {
                     <tr>
                     <td class="align-middle">
                         @Html.DisplayFor(modelItem => item.nombre)
@@ -35,3 +45,4 @@
     </div>
 </div>
 @await Html.PartialAsync("_CreateItem", "Categorias")
+<partial name="_paginador" for="@Model.paginador">

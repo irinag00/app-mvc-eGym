@@ -24,21 +24,41 @@ namespace eGym.Controllers
         }
 
         // GET: Categorias
-        public async Task<IActionResult> Index(/*int pagina= 1*/)
+        public async Task<IActionResult> Index(string busqNombre,int pagina = 1)
         {
-            //paginador paginador = new paginador()
-            //{
-            //    cantReg = _context.Categorias.Count(),
-            //    pagActual = pagina,
-            //    regXpag = 1
-            //};
+            paginador paginador = new paginador()
+            {
+                CantidadRegistros = _context.Categorias.Count(),
+                PaginaActual = pagina,
+                RegistrosxPagina = 3
+            };
+
+            var consulta = _context.Categorias.Select(a => a);
+            if (!string.IsNullOrEmpty(busqNombre))
+            {
+                consulta = consulta.Where(e => e.nombre.Contains(busqNombre));
+            }
+           
+            paginador.CantidadRegistros = consulta.Count();
+
             //ViewData["paginador"] = paginador;
 
-            //var datosAmostrar = _context.Categorias
-            //    .Skip((paginador.pagActual - 1) * paginador.regXpag)
-            //    .Take(paginador.regXpag);
+            var datosAMostrar = consulta
+                .Skip((paginador.PaginaActual - 1) * paginador.RegistrosxPagina)
+                .Take(paginador.RegistrosxPagina);
 
-            return View(await _context.Categorias.ToListAsync());
+            foreach (var item in Request.Query)
+                paginador.ValoresQueryString.Add(item.Key, item.Value);
+
+            CategoriaViewModel Datos = new CategoriaViewModel()
+            {
+                ListaCategoria = await datosAMostrar.ToListAsync(),
+                busqNombre = busqNombre,
+                paginador = paginador,
+            };
+            return View(Datos);
+
+            //return View(await datosAmostrar.ToListAsync());
         }
 
         // GET: Categorias/Details/5
