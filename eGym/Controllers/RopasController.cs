@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using eGym.Models;
 using eGym.ModelsView;
+using Microsoft.AspNetCore.Authorization;
 
 namespace eGym.Controllers
 {
+    //[Authorize(Roles = UserRoles.Admin)]
     public class RopasController : Controller
     {
         private readonly AppDbContext _context;

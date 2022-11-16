@@ -30,12 +30,12 @@ namespace eGym
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>();
            
-            services.AddMemoryCache();
-            services.AddSession();
-            services.AddAuthentication(options =>
-            {
-                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            });
+            //services.AddMemoryCache();
+            //services.AddSession();
+            //services.AddAuthentication(options =>
+            //{
+            //    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            //});
 
             services.AddControllersWithViews();
 
@@ -72,7 +72,7 @@ namespace eGym
                 endpoints.MapRazorPages();
             });
             //Seed database
-            AppDbContextSeed.SeedRoleAsync(app).Wait();
+            //AppDbContextSeed.SeedUsersAndRolesAsync(app).Wait();
         }
     }
 }
