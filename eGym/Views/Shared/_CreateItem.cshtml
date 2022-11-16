@@ -2,7 +2,7 @@
 
 @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
 {
-    <div style="position: fixed; right: 25px; top: 80px;">
+    <div style="position: absolute; right: 25px; top: 100px;">
         <a asp-controller="@Model" asp-action="Create" class="btn btn-outline-dark">
             <i class="bi bi-plus-circle"></i> Crear Nuevo
         </a>

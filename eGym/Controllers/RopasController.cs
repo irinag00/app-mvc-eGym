@@ -24,7 +24,7 @@ namespace eGym.Controllers
         }
 
         // GET: Ropas
-        public async Task<IActionResult> Index(string busqNombre, int? categoriaId, int pagina= 1)
+        public async Task<IActionResult> Index(string busqNombre, int? categoriaId, int pagina= 1, bool busqueda = false)
         {
             paginador paginador = new paginador()
             {
@@ -36,11 +36,13 @@ namespace eGym.Controllers
             if (!string.IsNullOrEmpty(busqNombre))
             {
                 consultaCategoria = consultaCategoria.Where(e => e.nombre.Contains(busqNombre));
+                busqueda = true;
             }
 
             if (categoriaId.HasValue)
             {
                 consultaCategoria = consultaCategoria.Where(e => e.categoriaId == categoriaId);
+                busqueda= true;
             }
 
             paginador.CantidadRegistros = consultaCategoria.Count();
@@ -57,7 +59,8 @@ namespace eGym.Controllers
                 ListaRopa = await datosAMostrar.ToListAsync(),
                 ListaCategoria = new SelectList(_context.Categorias, "idCategoria", "nombre", categoriaId),
                 busqNombre = busqNombre,
-                paginador = paginador
+                paginador = paginador,
+                busqueda = busqueda
             };
             return View(Datos);
             //var appDbContext = _context.Ropas.Include(r => r.Categoria).Include(r => r.Marca).Include(r => r.Tienda);

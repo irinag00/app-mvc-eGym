@@ -9,10 +9,9 @@ namespace eGym.ModelsView
         public List<Ropa> ListaRopa { get; set; }
         public SelectList ListaCategoria { get; set; }
         public int? categoriaId { get; set; }
-        public SelectList ListaTienda { get; set; }
-        public int? tiendaId { get; set; }
         public string busqNombre { get; set; }
         public paginador paginador { get; set; }/* = new paginador();*/
+        public bool busqueda { get; set; }
     }
 
     public class paginador

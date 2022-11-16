@@ -13,16 +13,16 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Ropas" asp-action="Index"><i class="bi bi-shop"></i>eGym</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Ropas" asp-action="Index"><img src="~/pictures/Presentacion/IDEAL2.jpg" style="max-width: 80px"/></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Ropas" asp-action="Index">Inicio</a>
-                        </li>
+                        </li>*@
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                         {
                             <li class="nav-item dropdown">
@@ -55,9 +55,10 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted text-center">
         <div class="container">
-            &copy; 2022 - eGym - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - IDEAL - <a asp-controller="Ropas" asp-action="Index">Inicio</a>
+            - Seguinos - <i class="bi bi-whatsapp"></i>  <i class="bi bi-facebook"></i>  <i class="bi bi-instagram"></i>  <i class="bi bi-twitter"></i>  <i class="bi bi-twitch"></i>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
