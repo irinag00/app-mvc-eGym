@@ -14,6 +14,9 @@ namespace eGym.Models
         public string detalles { get; set; }
         [Display(Name = "Precio")]
         public double precio { get; set; }
+        [Display(Name = "Link Elemento")]
+        public string ? linkElemento { get; set; }
+
         [Display(Name = "Imagen")]
         public string ? imagenRopa { get; set; }
          

@@ -54,7 +54,7 @@ namespace eGym.Controllers
             foreach (var item in Request.Query)
                 paginador.ValoresQueryString.Add(item.Key, item.Value);
 
-            RopaViewModel Datos = new()
+            RopaViewModel Datos = new RopaViewModel()
             {
                 ListaRopa = await datosAMostrar.ToListAsync(),
                 ListaCategoria = new SelectList(_context.Categorias, "idCategoria", "nombre", categoriaId),
@@ -108,7 +108,7 @@ namespace eGym.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("idRopa,nombre,detalles,precio,imagenRopa,marcaId,tiendaId,categoriaId")] Ropa ropa)
+        public async Task<IActionResult> Create([Bind("idRopa,nombre,detalles,precio,imagenRopa,linkElemento,marcaId,tiendaId,categoriaId")] Ropa ropa)
         {
             if (ModelState.IsValid)
             {
@@ -165,7 +165,7 @@ namespace eGym.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("idRopa,nombre,detalles,precio,imagenRopa,marcaId,tiendaId,categoriaId")] Ropa ropa)
+        public async Task<IActionResult> Edit(int id, [Bind("idRopa,nombre,detalles,precio,imagenRopa,linkElemento,marcaId,tiendaId,categoriaId")] Ropa ropa)
         {
             if (id != ropa.idRopa)
             {

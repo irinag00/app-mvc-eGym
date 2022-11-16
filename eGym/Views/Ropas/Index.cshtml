@@ -76,9 +76,9 @@
                     <div class="col-md-12">
                         <div class="card-footer">
                             <p class="card-text">
-                                <a asp-action="Details" asp-route-id="@item.idRopa" class="btn btn-outline-primary float-right">
+                                <a asp-action="Details" asp-route-id="@item.idRopa" class="btn btn-outline-dark float-right">
                                     <i class="bi bi-eye-fill"></i> Ver Detalles</a>
-                                <a class="btn btn-outline-danger float-lg-end"><i class="bi bi-bookmark-heart"></i> Añadir a Favoritos ($@Html.DisplayFor(modelItem => @item.precio))</a>
+                                <a href="@item.linkElemento" target="_blank" class="btn btn-outline-dark float-lg-end"><i class="bi bi-cart4"></i> Comprar ($@Html.DisplayFor(modelItem => @item.precio))</a>
                             </p>
                         </div>
                     </div>
