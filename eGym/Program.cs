@@ -15,7 +15,9 @@ public class Program
             try
             {
                 var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+                var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
                 eGym.Models.AppDbContextSeed.SeedRoleAsync(roleManager).Wait();
+                eGym.Models.AppDbContextSeed.SeedAdminAsync(userManager).Wait();
             }
             catch (Exception)
             {
