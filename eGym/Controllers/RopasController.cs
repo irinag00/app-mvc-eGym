@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace eGym.Controllers
 {
-    [Authorize(Roles = UserRoles.Admin)]
+    
     public class RopasController : Controller
     {
         private readonly AppDbContext _context;
@@ -90,6 +90,7 @@ namespace eGym.Controllers
             return View(ropa);
         }
 
+        [Authorize(Roles = Roles.Admin)]
         // GET: Ropas/Create
         public IActionResult Create()
         {
