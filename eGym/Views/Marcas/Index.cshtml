@@ -1,5 +1,5 @@
-﻿@model IEnumerable<eGym.Models.Marca>
-
+﻿@*@model IEnumerable<eGym.Models.Marca>*@
+@model eGym.ModelsView.MarcaViewModel
 @{
     ViewData["Title"] = "Lista de Marcas";
 }
@@ -10,19 +10,19 @@
             <thead>
                 <tr>
                     <th class="text-center">
-                        @Html.DisplayNameFor(model => model.imagenMarca)
+                        @Html.DisplayNameFor(model => model.ListaMarca[0].imagenMarca)
                     </th>
                     <th class="text-center">
-                        @Html.DisplayNameFor(model => model.nombre)
+                        @Html.DisplayNameFor(model => model.ListaMarca[0].nombre)
                     </th>
                     <th class="text-center">
-                        @Html.DisplayNameFor(model => model.resumen)
+                        @Html.DisplayNameFor(model => model.ListaMarca[0].resumen)
                     </th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-        @foreach (var item in Model) {
+        @foreach (var item in Model.ListaMarca) {
                 <tr>
                     <td class="align-middle">
                             @if (!string.IsNullOrEmpty(item.imagenMarca))
@@ -36,15 +36,19 @@
                         <td class="align-middle" style="max-width:250px">
                         @Html.DisplayFor(modelItem => item.resumen)
                     </td>
-                    <td class="text-lg-end align-middle">
-                            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.idMarca"><i class="bi bi-pencil-square"></i>Editar</a> |
-                            <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.idMarca"><i class="bi bi-eye"></i>Detalles</a> |
-                            <a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.idMarca"><i class="bi bi-trash"></i>Eliminar</a>
-                    </td>
-                </tr>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <td class="text-lg-end align-middle">
+                                <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.idMarca"><i class="bi bi-pencil-square"></i>Editar</a> |
+                                <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.idMarca"><i class="bi bi-eye"></i>Detalles</a> |
+                                <a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.idMarca"><i class="bi bi-trash"></i>Eliminar</a>
+                            </td>
+                        }
+                    </tr>
         }
             </tbody>
         </table>
     </div>
 </div>
 @await Html.PartialAsync("_CreateItem", "Marcas")
+<partial name="_paginador" for="@Model.paginador">

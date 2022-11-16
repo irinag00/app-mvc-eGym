@@ -45,27 +45,30 @@
                                 @Html.DisplayFor(modelItem => Model.Tienda.nombre)
                             </a>
                         </p>
-                        <p class="card-text">
-                            <b>Colores: </b>
-                            <hr />
-                            <div class="row align-items">
-                                @foreach (var Color in Model.ropas_colores) 
-                                {
-                                    <div class="column text-center">
+                        @*@if (Model.ropas_colores )*@
+                        {
+                            <p class="card-text">
+                                <b>Colores: </b>
+                                <hr />
+                                <div class="row align-items">
+                                    @foreach (var Color in Model.ropas_colores)
+                                    {
+                                        <div class="column text-center">
                                             <img class="border-info rounded-circle" src="~/pictures/img-colores/@Color.color.imagenColor" style="max-width:150px" asp-append-version="true" />
 
-                                        <br />
-                                        <a asp-controller="Colores" asp-action="Details" asp-route-id="@Color.idColor">@Color.color.nombre</a>
-                                    </div>
-                                }
-                            </div>
-                        </p>
+                                            <br />
+                                            <a asp-controller="Colores" asp-action="Details" asp-route-id="@Color.idColor">@Color.color.nombre</a>
+                                        </div>
+                                    }
+                                </div>
+                            </p>
+                        
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="card-footer">
                         <p class="card-text">
-                            <a class="btn btn-outline-danger"><i class="bi bi-bookmark-heart"></i> Añadir a Favoritos ($@Html.DisplayFor(modelItem => Model.precio))</a>
+                            <a href="@Model.linkElemento" target="_blank" class="btn btn-outline-dark"><i class="bi bi-cart4"></i> Comprar ($@Html.DisplayFor(modelItem => Model.precio))</a>
                         </p>
                     </div>
                 </div>

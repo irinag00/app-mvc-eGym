@@ -48,7 +48,7 @@ namespace eGym.Controllers
 
             return View(ropa_Color);
         }
-        [Authorize(Roles = Roles.Admin)]
+        [Authorize]
         // GET: Ropa_Color/Create
         public IActionResult Create()
         {

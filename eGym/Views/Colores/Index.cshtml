@@ -1,25 +1,33 @@
-﻿@model IEnumerable<eGym.Models.Color>
-
+﻿@*@model IEnumerable<eGym.Models.Color>*@
+@model eGym.ModelsView.ColorViewModel
 @{
     ViewData["Title"] = "Lista de Colores";
 }
-
+<div class="col-lg-6">
+    <form asp-action="Index" method="get">
+        <div class="input-group">
+            <input type="text" class="form-control" asp-for="busqNombre" value="@Model.busqNombre" placeholder="¿Qué estas buscando?" />
+            <button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
+        </div>
+    </form>
+</div>
+<br />
 <div class="row">
     <div class="col-md-8 offset-md-2">
         <table class="table">
             <thead>
                 <tr>
                     <th class="text-center">
-                        @Html.DisplayNameFor(model => model.imagenColor)
+                        @Html.DisplayNameFor(model => model.ListaColor[0].imagenColor)
                     </th>
                     <th class="text-center">
-                        @Html.DisplayNameFor(model => model.nombre)
+                        @Html.DisplayNameFor(model => model.ListaColor[0].nombre)
                     </th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-        @foreach (var item in Model) {
+        @foreach (var item in Model.ListaColor) {
                 <tr>
                     <td class="align-middle">
                             @if (!string.IsNullOrEmpty(item.imagenColor))
@@ -30,15 +38,19 @@
                     <td class="align-middle">
                             @Html.DisplayFor(modelItem => item.nombre)
                     </td>
-                    <td class="text-lg-end align-middle">
-                            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.idColor"><i class="bi bi-pencil-square"></i>Editar</a> |
-                            <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.idColor"><i class="bi bi-eye"></i>Detalles</a> |
-                            <a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.idColor"><i class="bi bi-trash"></i>Eliminar</a>
-                    </td>
-                </tr>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <td class="text-lg-end align-middle">
+                                <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.idColor"><i class="bi bi-pencil-square"></i>Editar</a> |
+                                <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.idColor"><i class="bi bi-eye"></i>Detalles</a> |
+                                <a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.idColor"><i class="bi bi-trash"></i>Eliminar</a>
+                            </td>
+                        }
+                    </tr>
         }
             </tbody>
         </table>
     </div>
 </div>
 @await Html.PartialAsync("_CreateItem", "Colores")
+<partial name="_paginador" for="@Model.paginador">
