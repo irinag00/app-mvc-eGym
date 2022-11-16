@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using eGym.Models;
 using eGym.ModelsView;
+using Microsoft.AspNetCore.Authorization;
 
 namespace eGym.Controllers
 {
+    [Authorize]
     public class CategoriasController : Controller
     {
         private readonly AppDbContext _context;
@@ -57,6 +59,7 @@ namespace eGym.Controllers
             return View(categoria);
         }
 
+        [Authorize(Roles = Roles.Admin)]
         // GET: Categorias/Create
         public IActionResult Create()
         {

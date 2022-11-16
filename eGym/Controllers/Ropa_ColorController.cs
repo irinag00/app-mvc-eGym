@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using eGym.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace eGym.Controllers
 {
@@ -47,7 +48,7 @@ namespace eGym.Controllers
 
             return View(ropa_Color);
         }
-
+        [Authorize(Roles = Roles.Admin)]
         // GET: Ropa_Color/Create
         public IActionResult Create()
         {

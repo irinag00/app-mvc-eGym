@@ -4,9 +4,6 @@
     ViewData["Title"] = "Lista de Colores";
 }
 
-<p>
-    <a asp-action="Create">Crear Nuevo</a>
-</p>
 <div class="row">
     <div class="col-md-8 offset-md-2">
         <table class="table">
@@ -44,3 +41,4 @@
         </table>
     </div>
 </div>
+@await Html.PartialAsync("_CreateItem", "Colores")

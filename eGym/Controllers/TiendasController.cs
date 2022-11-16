@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using eGym.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace eGym.Controllers
 {
+    [Authorize]
     public class TiendasController : Controller
     {
         private readonly AppDbContext _context;
@@ -42,7 +44,7 @@ namespace eGym.Controllers
 
             return View(tienda);
         }
-
+        [Authorize(Roles = Roles.Admin)]
         // GET: Tiendas/Create
         public IActionResult Create()
         {
