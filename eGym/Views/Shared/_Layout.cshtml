@@ -26,13 +26,14 @@
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                         {
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-gear"></i>Administrador</a>
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-gear"></i>Configuración de datos</a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" asp-controller="Categorias" asp-action="Index">Categorías</a>
                                     <a class="dropdown-item" asp-controller="Colores" asp-action="Index">Colores</a>
                                     <a class="dropdown-item" asp-controller="Marcas" asp-action="Index">Marcas</a>
                                     <a class="dropdown-item" asp-controller="Tiendas" asp-action="Index">Tiendas</a>
                                     <a class="dropdown-item" asp-controller="Ropa_Color" asp-action="Index">Ropa_Color</a>
+                                    <a class="dropdown-item" asp-controller="UserRoles" asp-action="Index">Roles y Usuarios</a>
                                 </div>
                             </li>
                         }
@@ -42,6 +43,7 @@
                     </div>
                     <partial name="_LoginPartial" />
                 </div>
+               
             </div>
         </nav>
         @*<img src="https://cdn.shopify.com/s/files/1/1367/5207/files/DUAL_BESTSELLERS_DESKTOP.jpg?v=1665652795" width="100%" />*@

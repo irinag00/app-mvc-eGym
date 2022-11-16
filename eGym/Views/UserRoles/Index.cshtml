@@ -1,0 +1,39 @@
+﻿@model List<Microsoft.AspNetCore.Identity.IdentityUser>
+
+    @{
+        ViewData["Title"] = "Lista de Usuarios y Roles";
+    }
+
+    <h1>Usuarios y Roles</h1>
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>User Name</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="align-middle">
+                                @item.UserName
+                            </td>
+                            <td class="align-middle">
+                                @item.Email
+                            </td>
+                           @* <td class="text-lg-end">
+                                <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.idCategoria"><i class="bi bi-pencil-square"></i>Editar</a> |
+                                <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.idCategoria"><i class="bi bi-eye"></i>Detalles</a> |
+                                <a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.idCategoria"><i class="bi bi-trash"></i>Eliminar</a>
+                            </td>*@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>

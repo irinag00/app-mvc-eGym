@@ -30,7 +30,10 @@
                             <p class="card-text">
                                 <h5 class="card-title">
                                     @Html.DisplayFor(modelItem => item.nombre)
-                                    <a asp-action="Edit" asp-route-id="@item.idRopa" class="text-white float-right"><i class="bi bi-pencil-square"></i></a>
+                                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                    {
+                                        <a asp-action="Edit" asp-route-id="@item.idRopa" class="text-white float-right"><i class="bi bi-pencil-square"></i></a>
+                                    }
                                 </h5>
                             </p>
                         </div>
@@ -80,7 +83,8 @@
         </div>
     }
 </div>
-<p>
+@*<p>
     <a asp-action="Create">Crear Nuevo</a>
-</p>
+</p>*@
 <partial name="_paginador" for="@Model.paginador]">
+@await Html.PartialAsync("_CreateItem", "Ropas")
