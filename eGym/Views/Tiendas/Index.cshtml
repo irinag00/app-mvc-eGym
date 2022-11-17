@@ -1,28 +1,36 @@
-﻿@model IEnumerable<eGym.Models.Tienda>
+﻿@model eGym.ModelsView.TiendaViewModel
 
 @{
     ViewData["Title"] = "Lista de Tiendas";
 }
-
+<div class="col-lg-6 justify-content-center">
+    <form asp-action="Index" method="get">
+        <div class="input-group">
+            <input type="text" class="form-control" asp-for="busqNombre" value="@Model.busqNombre" placeholder="¿Qué estas buscando?" />
+            <button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
+        </div>
+    </form>
+</div>
+<br />
 <div class="row">
     <div class="col-md-8 offset-md-2">
         <table class="table">
             <thead>
                 <tr>
                     <th class="text-center">
-                        @Html.DisplayNameFor(model => model.imagenTienda)
+                        @Html.DisplayNameFor(model => model.ListaTienda[0].imagenTienda)
                     </th>
                     <th class="text-center">
-                        @Html.DisplayNameFor(model => model.nombre)
+                        @Html.DisplayNameFor(model => model.ListaTienda[0].nombre)
                     </th>
                     <th class="text-center">
-                        @Html.DisplayNameFor(model => model.resumen)
+                        @Html.DisplayNameFor(model => model.ListaTienda[0].resumen)
                     </th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-        @foreach (var item in Model) {
+        @foreach (var item in Model.ListaTienda) {
                 <tr>
                     <td class="align-middle text-center">
                             @if (!string.IsNullOrEmpty(item.imagenTienda))
@@ -36,15 +44,19 @@
                         <td class="align-middle text-center">
                             <a href="@Html.DisplayFor(modelItem => item.resumen)" target="_blank">@Html.DisplayFor(modelItem => item.resumen)</a>
                     </td>
-                    <td class="text-lg-end align-middle">
-                            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.idTienda"><i class="bi bi-pencil-square"></i>Editar</a> |
-                            <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.idTienda"><i class="bi bi-eye"></i>Detalles</a> |
-                            <a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.idTienda"><i class="bi bi-trash"></i>Eliminar</a>
-                    </td>
-                </tr>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <td class="text-lg-end align-middle">
+                                <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.idTienda"><i class="bi bi-pencil-square"></i>Editar</a> |
+                                <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.idTienda"><i class="bi bi-eye"></i>Detalles</a> |
+                                <a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.idTienda"><i class="bi bi-trash"></i>Eliminar</a>
+                            </td>
+                        }
+                    </tr>
         }
             </tbody>
         </table>
     </div>
 </div>
 @await Html.PartialAsync("_CreateItem", "Tiendas")
+<partial name="_paginador" for="@Model.paginador">

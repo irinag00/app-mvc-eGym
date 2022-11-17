@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using eGym.Models;
 using Microsoft.AspNetCore.Authorization;
+using eGym.ModelsView;
 
 namespace eGym.Controllers
 {
@@ -22,9 +23,40 @@ namespace eGym.Controllers
         }
 
         // GET: Tiendas
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string busqNombre, int pagina = 1)
         {
-              return View(await _context.Tiendas.ToListAsync());
+            paginador paginador = new paginador()
+            {
+                CantidadRegistros = _context.Tiendas.Count(),
+                PaginaActual = pagina,
+                RegistrosxPagina = 3
+            };
+
+            var consulta = _context.Tiendas.Select(a => a);
+            if (!string.IsNullOrEmpty(busqNombre))
+            {
+                consulta = consulta.Where(e => e.nombre.Contains(busqNombre));
+            }
+
+            paginador.CantidadRegistros = consulta.Count();
+
+            //ViewData["paginador"] = paginador;
+
+            var datosAMostrar = consulta
+                .Skip((paginador.PaginaActual - 1) * paginador.RegistrosxPagina)
+                .Take(paginador.RegistrosxPagina);
+
+            foreach (var item in Request.Query)
+                paginador.ValoresQueryString.Add(item.Key, item.Value);
+
+            TiendaViewModel Datos = new TiendaViewModel()
+            {
+                ListaTienda = await datosAMostrar.ToListAsync(),
+                busqNombre = busqNombre,
+                paginador = paginador,
+            };
+            return View(Datos);
+            //return View(await _context.Tiendas.ToListAsync());
         }
 
         // GET: Tiendas/Details/5
