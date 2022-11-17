@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using eGym.Models;
 using eGym.ModelsView;
 using Microsoft.AspNetCore.Authorization;
+using System.Text;
 
 namespace eGym.Controllers
 {
@@ -22,6 +23,31 @@ namespace eGym.Controllers
             _context = context;
             this.env = env; 
         }
+
+        public FileResult Exportar()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("nombre; detalles; precio; linkElemento; imagenRopa; marcaId; nombreMarca; tiendaId; nombreTienda; categoriaId; nombreCategoria;\r\n");
+            foreach (Ropa ropa in _context.Ropas.Include(r => r.Categoria).Include(r => r.Marca).Include(r => r.Tienda).ToList())
+            {
+                sb.Append(ropa.nombre + ";");
+                sb.Append(ropa.detalles + ";");
+                sb.Append(ropa.precio + ";");
+                sb.Append(ropa.linkElemento + ";");
+                sb.Append(ropa.imagenRopa + ";");
+                sb.Append(ropa.marcaId + ";");
+                sb.Append(ropa.Marca.nombre + ";");
+                sb.Append(ropa.tiendaId + ";");
+                sb.Append(ropa.Tienda.nombre + ";");
+                sb.Append(ropa.categoriaId + ";");
+                sb.Append(ropa.Categoria.nombre + ";");
+                //Append new line character.
+                sb.Append("\r\n");
+            }
+
+            return File(Encoding.UTF8.GetBytes(sb.ToString()), "text/csv", "listado.csv");
+        }
+
 
         // GET: Ropas
         public async Task<IActionResult> Index(string busqNombre, int? categoriaId, int pagina= 1, bool busqueda = false)

@@ -23,6 +23,15 @@
                         @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Ropas" asp-action="Index">Inicio</a>
                         </li>*@
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-black" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-list"></i></i>Listados</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" asp-controller="Categorias" asp-action="Index">Categorías</a>
+                                <a class="dropdown-item" asp-controller="Colores" asp-action="Index">Colores</a>
+                                <a class="dropdown-item" asp-controller="Marcas" asp-action="Index">Marcas</a>
+                                <a class="dropdown-item" asp-controller="Tiendas" asp-action="Index">Tiendas</a>
+                            </div>
+                        </li>
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                         {
                             <li class="nav-item dropdown">

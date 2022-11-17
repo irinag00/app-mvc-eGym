@@ -85,8 +85,12 @@
                 </div>
             </div>
         </div>
-    }
+     }
 </div>
+@if (User.Identity.IsAuthenticated)
+{
+    <a class="btn btn-outline-dark" asp-action="Exportar">Exportar listado a CSV </a>
+}
 @*<p>
     <a asp-action="Create">Crear Nuevo</a>
 </p>*@
