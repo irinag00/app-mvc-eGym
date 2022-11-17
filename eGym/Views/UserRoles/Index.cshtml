@@ -1,4 +1,4 @@
-﻿@model List<Microsoft.AspNetCore.Identity.IdentityUser>
+﻿@model List<eGym.ModelsView.UserRolesView>
 
     @{
         ViewData["Title"] = "Lista de Usuarios y Roles";
@@ -13,7 +13,7 @@
                     <tr>
                         <th>User Name</th>
                         <th>Email</th>
-                        <th>Action</th>
+                        <th>Roles</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,11 +26,9 @@
                             <td class="align-middle">
                                 @item.Email
                             </td>
-                           @* <td class="text-lg-end">
-                                <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.idCategoria"><i class="bi bi-pencil-square"></i>Editar</a> |
-                                <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.idCategoria"><i class="bi bi-eye"></i>Detalles</a> |
-                                <a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.idCategoria"><i class="bi bi-trash"></i>Eliminar</a>
-                            </td>*@
+                            <td class="align-middle">
+                                @string.Join(",", item.Roles)
+                            </td>
                         </tr>
                     }
                 </tbody>
