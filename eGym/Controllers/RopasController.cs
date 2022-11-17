@@ -48,6 +48,81 @@ namespace eGym.Controllers
             return File(Encoding.UTF8.GetBytes(sb.ToString()), "text/csv", "listado.csv");
         }
 
+        public IActionResult Importar()
+        {
+            var archivos = HttpContext.Request.Form.Files;
+            if (archivos != null && archivos.Count > 0)
+            {
+                var archivoImpo = archivos[0];
+                var pathDestino = Path.Combine(env.WebRootPath, "importaciones");
+                if (archivoImpo.Length > 0)
+                {
+                    var archivoDestino = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(archivoImpo.FileName);
+                    string rutaCompleta = Path.Combine(pathDestino, archivoDestino);
+                    using (var filestream = new FileStream(rutaCompleta, FileMode.Create))
+                    {
+                        archivoImpo.CopyTo(filestream);
+                    };
+
+                    using (var file = new FileStream(rutaCompleta, FileMode.Open))
+                    {
+                        List<string> renglones = new List<string>();
+                        List<Ropa> RopaArch = new List<Ropa>();
+
+                        StreamReader fileContent = new StreamReader(file); // System.Text.Encoding.Default
+                        do
+                        {
+                            renglones.Add(fileContent.ReadLine().Trim());
+                        }
+                        while (!fileContent.EndOfStream);
+
+                        foreach (string renglon in renglones)
+                        {
+                            int salida;
+                            bool correcto = false;
+                            string[] datos = renglon.Split(';');
+                            int categoria = int.TryParse(datos[datos.Length - 1], out salida) ? salida : 0;
+                            int marca = int.TryParse(datos[datos.Length - 1], out salida) ? salida : 0;
+                            int tienda = int.TryParse(datos[datos.Length - 1], out salida) ? salida : 0;
+                            if (categoria > 0 && _context.Categorias.Where(c => c.idCategoria == categoria).FirstOrDefault() != null)
+                            {
+                                correcto = true;
+                                if (marca > 0 && _context.Marcas.Where(c => c.idMarca == marca).FirstOrDefault() != null)
+                                {
+                                    correcto = true;
+                                    if (tienda > 0 && _context.Tiendas.Where(c => c.idTienda == tienda).FirstOrDefault() != null)
+                                    {
+                                        correcto = true;
+                                        Ropa ropaImportada = new Ropa()
+                                        {
+                                            categoriaId = categoria,
+                                            marcaId = marca,
+                                            tiendaId = tienda,
+                                            nombre = datos[0],
+                                            detalles = datos[1],
+                                            precio = int.TryParse(datos[3], out salida) ? salida : 0,
+                                            linkElemento = datos[4]
+                                        };
+                                        RopaArch.Add(ropaImportada);
+                                    }
+                                }
+                            }
+
+                        }
+                        if (RopaArch.Count > 0)
+                        {
+                            _context.Ropas.AddRange(RopaArch);
+                            _context.SaveChanges();
+                        }
+
+                        ViewBag.cantReng = RopaArch.Count + " de " + renglones.Count;
+                    }
+                }
+            }
+
+            return View();
+        }
+
 
         // GET: Ropas
         public async Task<IActionResult> Index(string busqNombre, int? categoriaId, int pagina= 1, bool busqueda = false)
