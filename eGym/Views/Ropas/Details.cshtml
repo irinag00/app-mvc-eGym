@@ -36,12 +36,12 @@
                             </a>
                         </p>
                         <p class="card-text"><b>@Html.DisplayNameFor(model => model.Marca): </b> 
-                            <a asp-controller="Categorias" asp-action="Details" asp-route-id="@Model.marcaId">
+                            <a asp-controller="Marcas" asp-action="Details" asp-route-id="@Model.marcaId">
                                 @Html.DisplayFor(modelItem => Model.Marca.nombre)
                             </a>
                         </p>
                         <p class="card-text"><b>@Html.DisplayNameFor(model => model.Tienda): </b> 
-                            <a asp-controller="Categorias" asp-action="Details" asp-route-id="@Model.tiendaId">
+                            <a asp-controller="Tiendas" asp-action="Details" asp-route-id="@Model.tiendaId">
                                 @Html.DisplayFor(modelItem => Model.Tienda.nombre)
                             </a>
                         </p>

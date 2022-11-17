@@ -29,7 +29,7 @@
             </thead>
             <tbody>
         @foreach (var item in Model.ListaCategoria) {
-                    <tr>
+                <tr>
                     <td class="align-middle">
                         @Html.DisplayFor(modelItem => item.nombre)
                     </td>
@@ -41,7 +41,7 @@
                                 <a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.idCategoria"><i class="bi bi-trash"></i>Eliminar</a>
                             </td>
                         }
-                    </tr>
+                </tr>
         }
             </tbody>
         </table>
