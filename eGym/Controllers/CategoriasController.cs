@@ -23,6 +23,65 @@ namespace eGym.Controllers
             this.env = env; 
         }
 
+        public IActionResult Importar()
+        {
+            var archivos = HttpContext.Request.Form.Files;
+            if (archivos != null && archivos.Count > 0)
+            {
+                var archivoImpo = archivos[0];
+                var pathDestino = Path.Combine(env.WebRootPath, "importaciones");
+                if (archivoImpo.Length > 0)
+                {
+                    var archivoDestino = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(archivoImpo.FileName);
+                    string rutaCompleta = Path.Combine(pathDestino, archivoDestino);
+                    using (var filestream = new FileStream(rutaCompleta, FileMode.Create))
+                    {
+                        archivoImpo.CopyTo(filestream);
+                    };
+
+                    using (var file = new FileStream(rutaCompleta, FileMode.Open))
+                    {
+                        List<string> renglones = new List<string>();
+                        List<Categoria> CategoriaArch = new List<Categoria>();
+
+                        StreamReader fileContent = new StreamReader(file); // System.Text.Encoding.Default
+                        do
+                        {
+                            renglones.Add(fileContent.ReadLine());
+                        }
+                        while (!fileContent.EndOfStream);
+
+                        foreach (string renglon in renglones)
+                        {
+                            int salida;
+                            string[] datos = renglon.Split(';');
+                            //int carrera = int.TryParse(datos[datos.Length - 1], out salida) ? salida : 0;
+                            //if (carrera > 0 && _context.carreras.Where(c => c.id == carrera).FirstOrDefault() != null)
+                            {
+                                Categoria categoriaImportada = new Categoria()
+                                {
+                                    nombre = datos[0]
+                                    //inscripcion = int.TryParse(datos[1], out salida) ? salida : 0,
+                                    //estado = datos[2] == "1" ? true : false,
+                                    //fechaNac = DateTime.TryParse(datos[3], out DateTime fecha) ? fecha : DateTime.MinValue
+                                };
+                                CategoriaArch.Add(categoriaImportada);
+                            }
+                        }
+                        if (CategoriaArch.Count > 0)
+                        {
+                            _context.Categorias.AddRange(CategoriaArch);
+                            _context.SaveChanges();
+                        }
+
+                        ViewBag.cantReng = CategoriaArch.Count + " de " + renglones.Count;
+                    }
+                }
+            }
+
+            return View();
+        }
+
         // GET: Categorias
         public async Task<IActionResult> Index(string busqNombre,int pagina = 1)
         {

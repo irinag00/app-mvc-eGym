@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\Importaciones\" />
     <Folder Include="wwwroot\pictures\img-colores\" />
     <Folder Include="wwwroot\pictures\img-ropa\" />
     <Folder Include="wwwroot\pictures\img-marca\" />
