@@ -15,58 +15,33 @@
                 <div class="form-group text-center">
                     <input type="hidden" name="foto" id="foto" value="@Model.imagenColor" />
                     <img src="@(!string.IsNullOrEmpty(Model.imagenColor) ? "/pictures/img-colores/"+Model.imagenColor : "")" id="imagen" class="rounded-circle" style="max-width:250px" />
-                 </div>
-        <p class="card-text">
-            <b>Colores: </b>
-            <hr />
-            <div class="row align-items">
-                @foreach (var ropa in Model.ropas_colores)
-                {
-                    <div class="column text-center">
-                        <img class="border-info rounded-circle" src="~/pictures/img-ropa/@ropa.ropa.imagenRopa" style="max-width:150px" asp-append-version="true" />
+                </div>
+                <p class="card-text">
+                    <b>Colores: </b>
+                    <hr />
+                    <div class="row align-items">
+                        @foreach (var ropa in Model.ropas_colores)
+                        {
+                            <div class="column text-center">
+                                <img class="border-info rounded-circle" src="~/pictures/img-ropa/@ropa.ropa.imagenRopa" style="max-width:150px" asp-append-version="true" />
 
-                        <br />
-                        <a asp-controller="Ropas" asp-action="Details" asp-route-id="@ropa.idRopa">@ropa.ropa.nombre</a>
+                                <br />
+                                <a asp-controller="Ropas" asp-action="Details" asp-route-id="@ropa.idRopa">@ropa.ropa.nombre</a>
+                            </div>
+                        }
                     </div>
-                }
-            </div>
-        </p>
+                </p>
            </div>
        </div>
     </div>
 </div>
 
-<@*div class="row text">
-    <div class="col-md-8 offset-2">
-        <h4>Color</h4>
-        <hr />
-        <dl class="row">
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.nombre)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.nombre)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.imagenColor)
-            </dt>
-            @*<dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.imagenColor)
-            </dd>*@
-        @*    <dt class="col-sm-2">
-                <input type="hidden" name="foto" id="foto" value="@Model.imagenColor" />
-                <img src="@(!string.IsNullOrEmpty(Model.imagenColor) ? "/pictures/img-colores/"+Model.imagenColor : "")" id="imagen" class="rounded-circle" style="max-width:150px" />
-            </dt>
-        </dl>
-    </div>
-       </div>*@
 
 <div>
 
     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
     {
-        <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@Model?.idColor">Editar</a>
+        <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@Model?.idColor">Editar</a>
     }
-    |
     <a class="btn btn-outline-dark" asp-action="Index"><i class="bi bi-arrow-return-left"></i> Volver a la Lista</a>
 </div>

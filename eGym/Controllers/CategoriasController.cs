@@ -55,15 +55,10 @@ namespace eGym.Controllers
                         {
                             int salida;
                             string[] datos = renglon.Split(';');
-                            //int carrera = int.TryParse(datos[datos.Length - 1], out salida) ? salida : 0;
-                            //if (carrera > 0 && _context.carreras.Where(c => c.id == carrera).FirstOrDefault() != null)
                             {
                                 Categoria categoriaImportada = new Categoria()
                                 {
                                     nombre = datos[0]
-                                    //inscripcion = int.TryParse(datos[1], out salida) ? salida : 0,
-                                    //estado = datos[2] == "1" ? true : false,
-                                    //fechaNac = DateTime.TryParse(datos[3], out DateTime fecha) ? fecha : DateTime.MinValue
                                 };
                                 CategoriaArch.Add(categoriaImportada);
                             }
